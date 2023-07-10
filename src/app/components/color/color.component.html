@@ -9,7 +9,8 @@
 
     <tr *ngFor="let color of colors" >
         <ul class="list-group" style="background-color: azure;">
-            <li (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.id}}" [class]="getCurrentColorClass(color)">{{color.name}}</li>
+            <li  (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.id}}" [class]="getCurrentColorClass(color)">{{color.name}}</li>
         </ul>
+        
     </tr>
 </table>
