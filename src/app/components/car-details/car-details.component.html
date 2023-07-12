@@ -13,7 +13,7 @@
         </tr>
     </thead>
 
-    <tr *ngFor="let car of cars" (click)="setCurrentCar(car)" routerLink="/car/{{car.carId}}">
+    <tr>
         <td >{{car.brandName}}</td>
         <td >{{car.carName}}</td>
         <td >{{car.colorName}}</td>
@@ -21,4 +21,8 @@
         <td >{{car.dailyPrice}}</td>
       
     </tr>
+    <div *ngFor="let image of images">
+        <img [src]="imagePathPrefix + image.imagePath" width="600px" height="250px">
+    </div>
+    
 </table>
