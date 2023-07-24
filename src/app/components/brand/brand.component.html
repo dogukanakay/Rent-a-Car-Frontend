@@ -2,12 +2,19 @@
     <span class="visually-hidden">Loading...</span>
   </div>
 
+<div class="mb-3">
+    <label for="filterText" class="form-label">Marka ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Arama ifadesi giriniz">
+  </div>
+  <div *ngIf="filterText.length>2" class="alert alert-success">
+    {{filterText}} aradınız
+</div>
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
         <tr><th style="background-color: coral;">Markalar</th></tr>
     </thead>
 
-    <tr *ngFor="let brand of brands" >
+    <tr *ngFor="let brand of brands | filterBrand:filterText"  >
         <ul class="list-group" style="background-color: azure;">
             <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
         </ul>

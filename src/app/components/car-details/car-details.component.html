@@ -1,28 +1,50 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-primary"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<table *ngIf="dataLoaded == true" class="table table-success">
+  <thead>
+    <tr>
+      <th>Marka Adı</th>
+      <th>Model Adı</th>
+      <th>Renk</th>
+      <th>Model Yılı</th>
+      <th>Gunluk Ucreti</th>
+    </tr>
+  </thead>
+
+  <tr>
+    <td>{{ car.brandName }}</td>
+    <td>{{ car.carName }}</td>
+    <td>{{ car.colorName }}</td>
+    <td>{{ car.modelYear }}</td>
+    <td>{{ car.dailyPrice }}</td>
+  </tr>
+  <div *ngFor="let image of images">
+    <img
+      [src]="imagePathPrefix + image.imagePath"
+      width="600px"
+      height="250px"
+    />
   </div>
 
-<table *ngIf="dataLoaded==true" class="table table-success">
-    <thead>
-        <tr>
-            <th>Marka Adı</th>
-            <th>Model Adı</th>
-            <th>Renk</th>
-            <th>Model Yılı</th>
-            <th>Gunluk Ucreti</th>
-        </tr>
-    </thead>
+  <div style="margin-block: 20px;" >
+    <label for="rentDate">Alacağınız Gün:</label>
+    <input  style="margin-left: 20px" type="date"  name="rentDate" [(ngModel)]="rentDate"/>
 
-    <tr>
-        <td >{{car.brandName}}</td>
-        <td >{{car.carName}}</td>
-        <td >{{car.colorName}}</td>
-        <td >{{car.modelYear}}</td>
-        <td >{{car.dailyPrice}}</td>
-      
-    </tr>
-    <div *ngFor="let image of images">
-        <img [src]="imagePathPrefix + image.imagePath" width="600px" height="250px">
-    </div>
-    
+    <label style="margin-left: 20px" for="rentTime" >Alacağınız Saat:</label>
+    <input style="margin-left: 20px;" type="time" name="rentTime" />
+
+    <label style="margin-left: 20px" for="returnDate">Geri Getirelecek Gün:</label>
+    <input style="margin-left: 20px" type="date" name="returnDate" [(ngModel)]="returnDate"/>
+
+    <label style="margin-left: 20px" for="returnTime">Geri Getirelecek Saat:</label>
+    <input style="margin-left: 20px" type="time" name="returnTime" />
+
+    <button (click)="isRentable(car.carId, rentDate, returnDate)" class="btn btn-primary" type="button"style="margin-left: 20px">Kirala</button>
+  </div>
 </table>

@@ -1,8 +1,8 @@
 import { Time } from "@angular/common"
 
-export interface Rental{
-    brandName:string
-    customerName:string
+export interface RentalPost{
+    carId:number
+    customerId:number
     rentDate:Date
     returnDate:Date
 }
