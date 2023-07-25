@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="col-md-12">
+      <div class="card">
+          <div class="card-header"><h5 class="title">Ürün Ekle</h5></div>
+          <div class="card-body">
+              <form >
+                  <div class="mb-3">
+                      <label for="kkNumarisi" >Kredi Karti Numarasi</label>
+                      <div class="form-group">
+                          <input type="text" id="kkNumarisi"  class="form-control" placeholder="1234 5678 90123 4567"/>
+                      </div>
+                  </div>
+                  
+                  <div class="mb-3"> 
+                      <label for="sgTarihi" >Son Geçerlilik Tarihi</label>
+                      <div class="form-group">
+                          <input type="text" id="sgTarihi"  class="form-control" placeholder="01/01"/>
+                      </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                      <label for="cvv" >CVV</label>
+                      <div class="form-group">
+                          <input type="password" id="cvv"  class="form-control" />
+                      </div>
+                  </div>
+                 
+                 
+                  
+              </form>
+
+          </div>
+          <div class="card-footer">
+                <label>Toplam tutar = {{toplamTutar}}</label>
+              <button (click)="createRental()" class="btn btn-fill btn-primary" >Öde</button>
+          </div>
+      </div>
+
+
+  </div>
+  
+</div>

@@ -6,6 +6,7 @@ import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
 import { RentalPost } from '../models/rentalPost';
 import { EntityResponseModel } from '../models/entityResponseModel';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,16 @@ import { EntityResponseModel } from '../models/entityResponseModel';
 export class RentalService {
   apiUrl='https://localhost:44338/api/Rentals'
   constructor(private httpClient:HttpClient) { }
+  private rentalPostKey = "rental_post_key"
+  
+  saveRentalPostInformation(rentalPost:RentalPost):void{
+    localStorage.setItem(this.rentalPostKey, JSON.stringify(rentalPost))
+  }
+
+  getRentalPostInformation():RentalPost{
+    const savedRentalPostInformation = localStorage.getItem(this.rentalPostKey)
+    return savedRentalPostInformation? JSON.parse(savedRentalPostInformation) : null;
+  }
 
   getRentals():Observable<ListResponseModel<Rental>>{
     let newPath = this.apiUrl + "/getdetails"
@@ -28,4 +39,6 @@ export class RentalService {
     const queryParams = `carId=${carId}&rentDate=${rentDate}&returnDate=${returnDate}`;
     return this.httpClient.get(newPath + '?' + queryParams);
   }
+
+  
 }

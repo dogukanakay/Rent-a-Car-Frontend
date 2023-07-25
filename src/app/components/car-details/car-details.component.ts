@@ -1,7 +1,7 @@
 
 import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { Image } from 'src/app/models/image';
@@ -31,7 +31,7 @@ export class CarDetailsComponent implements OnInit {
   };
   
  
-  
+
 
 
   //Rental:RentalPost={carId:this.car.carId, customerId:1, rentDate:this.rentDate, returnDate:this.returnDate};
@@ -41,7 +41,7 @@ export class CarDetailsComponent implements OnInit {
   imagePathPrefix :string = "https://localhost:44338/uploads/images/";
 
   
-  constructor(private carService : CarService, private rentalService: RentalService,private activatedRoute:ActivatedRoute, private toastrService: ToastrService) {}
+  constructor(private carService : CarService, private rentalService: RentalService,private activatedRoute:ActivatedRoute, private toastrService: ToastrService, private router:Router) {}
 
   ngOnInit():void{
     this.activatedRoute.params.subscribe(params=>{
@@ -77,19 +77,18 @@ export class CarDetailsComponent implements OnInit {
       console.log(response)
       console.log(carId,rentDate,returnDate)
       if(response){
-        this.toastrService.success("Kiralanabilir","Araç Durumu")
+        this.rentalPost.carId=carId;
+        this.rentalPost.customerId=1;
+        this.rentalPost.rentDate=rentDate;
+        this.rentalPost.returnDate=returnDate
+        this.rentalService.saveRentalPostInformation(this.rentalPost)
+        this.toastrService.success("Araç Kiralanabilir. Ödeme Sayfasına Yönlendiriliyorsunuz.","Araç Durumu")
+        this.router.navigate(['/car', carId, 'payment']);
       }else{
         this.toastrService.error("Bu tarihlerde bu araç kiralanamaz", "Araç Durumu")
       }
 
-      /*if(response){
-        
-        this.rentalPost.carId=carId
-        this.rentalPost.customerId=1
-        this.rentalPost.rentDate = rentDate
-        this.rentalPost.returnDate = returnDate
-        this.addRental(this.rentalPost)
-      }*/
+      
     })
   }
 

@@ -56,6 +56,6 @@
     <td>{{ car.carName }}</td>
     <td>{{ car.colorName }}</td>
     <td>{{ car.modelYear }}</td>
-    <td>{{ car.dailyPrice }}</td>
+    <td>{{ car.dailyPrice | currency: '₺'}}</td>
   </tr>
 </table>
