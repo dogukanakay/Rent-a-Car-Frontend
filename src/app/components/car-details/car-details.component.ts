@@ -1,6 +1,8 @@
 
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { Image } from 'src/app/models/image';
 import { Rental } from 'src/app/models/rental';
@@ -19,6 +21,16 @@ export class CarDetailsComponent implements OnInit {
   rentCarId:number;
   rentDate :Date;
   returnDate : Date;
+  rentTime:Time;
+  returnTime:Time;
+  rentalPost: RentalPost = {
+    carId: 0,
+    customerId: 0,
+    rentDate: new Date(),
+    returnDate: new Date()
+  };
+  
+ 
   
 
 
@@ -29,7 +41,7 @@ export class CarDetailsComponent implements OnInit {
   imagePathPrefix :string = "https://localhost:44338/uploads/images/";
 
   
-  constructor(private carService : CarService, private rentalService: RentalService,private activatedRoute:ActivatedRoute, ) {}
+  constructor(private carService : CarService, private rentalService: RentalService,private activatedRoute:ActivatedRoute, private toastrService: ToastrService) {}
 
   ngOnInit():void{
     this.activatedRoute.params.subscribe(params=>{
@@ -51,20 +63,33 @@ export class CarDetailsComponent implements OnInit {
     })
   }
 
-  /*addRental(rentalPost:RentalPost){
-    rentalPost.carId=this.car.carId;
-    rentalPost.rentDate = this.rentDate
-    rentalPost.returnDate = this.returnDate
-    rentalPost.customerId=1;
+  addRental(rentalPost:RentalPost){
+    
     this.rentalService.addRental(rentalPost).subscribe(response =>{
      console.warn(response.success,response.message);
     })
-  }*/
+  }
   
   isRentable(carId:number, rentDate:Date, returnDate:Date){
+
+
     this.rentalService.isRentable(carId,rentDate,returnDate).subscribe(response=>{
       console.log(response)
       console.log(carId,rentDate,returnDate)
+      if(response){
+        this.toastrService.success("Kiralanabilir","Araç Durumu")
+      }else{
+        this.toastrService.error("Bu tarihlerde bu araç kiralanamaz", "Araç Durumu")
+      }
+
+      /*if(response){
+        
+        this.rentalPost.carId=carId
+        this.rentalPost.customerId=1
+        this.rentalPost.rentDate = rentDate
+        this.rentalPost.returnDate = returnDate
+        this.addRental(this.rentalPost)
+      }*/
     })
   }
 

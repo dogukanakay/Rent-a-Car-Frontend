@@ -37,13 +37,13 @@
     <input  style="margin-left: 20px" type="date"  name="rentDate" [(ngModel)]="rentDate"/>
 
     <label style="margin-left: 20px" for="rentTime" >Alacağınız Saat:</label>
-    <input style="margin-left: 20px;" type="time" name="rentTime" />
+    <input style="margin-left: 20px;" type="time" name="rentTime" [(ngModel)]="rentTime"/>
 
     <label style="margin-left: 20px" for="returnDate">Geri Getirelecek Gün:</label>
     <input style="margin-left: 20px" type="date" name="returnDate" [(ngModel)]="returnDate"/>
 
     <label style="margin-left: 20px" for="returnTime">Geri Getirelecek Saat:</label>
-    <input style="margin-left: 20px" type="time" name="returnTime" />
+    <input style="margin-left: 20px" type="time" name="returnTime" [(ngModel)]="returnTime" />
 
     <button (click)="isRentable(car.carId, rentDate, returnDate)" class="btn btn-primary" type="button"style="margin-left: 20px">Kirala</button>
   </div>
