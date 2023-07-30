@@ -23,6 +23,7 @@ export class PaymentComponent implements OnInit{
     rentDate: new Date(),
     returnDate: new Date()
   };
+  backupRentalPost = this.rentalPost
   
   constructor(private rentalService : RentalService, private activatedRoute:ActivatedRoute, private carService:CarService, private toastrService:ToastrService) {
     
@@ -47,6 +48,8 @@ export class PaymentComponent implements OnInit{
     this.rentalService.addRental(this.rentalPost).subscribe(response=>{
       if(response.success){
         this.toastrService.success(response.message)
+        this.rentalService.saveRentalPostInformation(this.backupRentalPost)
+        this.rentalPost=this.backupRentalPost
       }else{
         this.toastrService.error(response.message)
       }

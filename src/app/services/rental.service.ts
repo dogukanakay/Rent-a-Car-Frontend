@@ -34,10 +34,9 @@ export class RentalService {
     return this.httpClient.post<ResponseModel>(newPath,rentalPost);
   }
   
-  isRentable(carId:number, rentDate:Date, returnDate:Date){
+  isRentable(rentalPost:RentalPost){
     let newPath = this.apiUrl + "/isrentable"
-    const queryParams = `carId=${carId}&rentDate=${rentDate}&returnDate=${returnDate}`;
-    return this.httpClient.get(newPath + '?' + queryParams);
+    return this.httpClient.post<ResponseModel>(newPath, rentalPost);
   }
 
   

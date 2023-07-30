@@ -20,6 +20,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { FilterCarPipe } from './pipes/filter-car.pipe';
 import { PaymentComponent } from './components/payment/payment.component';
+import { BrandAddComponent } from './components/brand/brand-add/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color/color-add/color-add/color-add.component';
+import { CarAddComponent } from './components/car/car-add/car-add/car-add.component';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import { PaymentComponent } from './components/payment/payment.component';
     FilterColorPipe,
     FilterCarPipe,
     PaymentComponent,
+    BrandAddComponent,
+    ColorAddComponent,
+    CarAddComponent,
     
   
   ],

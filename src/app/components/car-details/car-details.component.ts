@@ -69,28 +69,35 @@ export class CarDetailsComponent implements OnInit {
      console.warn(response.success,response.message);
     })
   }
-  
-  isRentable(carId:number, rentDate:Date, returnDate:Date){
 
-
-    this.rentalService.isRentable(carId,rentDate,returnDate).subscribe(response=>{
+  saveRentalPostInformation(){
+    this.rentalPost.carId= this.car.carId;
+    this.rentalPost.customerId=1;
+    this.rentalPost.rentDate = this.rentDate;
+    this.rentalPost.returnDate = this.returnDate;
+    console.log(this.car.carId,1,this.rentDate,this.returnDate)
+    this.rentalService.isRentable(this.rentalPost).subscribe(response=>{
       console.log(response)
-      console.log(carId,rentDate,returnDate)
+      
       if(response){
-        this.rentalPost.carId=carId;
-        this.rentalPost.customerId=1;
-        this.rentalPost.rentDate=rentDate;
-        this.rentalPost.returnDate=returnDate
-        this.rentalService.saveRentalPostInformation(this.rentalPost)
         this.toastrService.success("Araç Kiralanabilir. Ödeme Sayfasına Yönlendiriliyorsunuz.","Araç Durumu")
-        this.router.navigate(['/car', carId, 'payment']);
+        this.router.navigate(['/cars', this.car.carId, 'payment']);
+        this.rentalService.saveRentalPostInformation(this.rentalPost);
       }else{
         this.toastrService.error("Bu tarihlerde bu araç kiralanamaz", "Araç Durumu")
       }
 
       
+    },responseError=>{
+      if(responseError.error.Errors.length>0){
+        for(let i=0; i<responseError.error.Errors.length; i++){
+          this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Doğrulama hatasi")
+        }
+      }
     })
   }
 
- 
-}
+    
+  }
+  
+  
