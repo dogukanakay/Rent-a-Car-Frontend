@@ -45,18 +45,21 @@
       <th>Renk</th>
       <th>Model Yılı</th>
       <th>Gunluk Ucreti</th>
-    </tr>
+      <th>Detaylar</th>
+      <th>Güncelle</th>
+      </tr>
   </thead>
 
   <tr
     *ngFor="let car of cars | filterCar:filterText"
-    (click)="setCurrentCar(car)"
-    routerLink="/cars/{{ car.carId }}"
+    
   >
     <td>{{ car.brandName }}</td>
     <td>{{ car.carName }}</td>
     <td>{{ car.colorName }}</td>
     <td>{{ car.modelYear }}</td>
     <td>{{ car.dailyPrice | currency: '₺'}}</td>
+    <td><button (click)="setCurrentCar(car)" routerLink="/cars/{{ car.carId }}" class="btn btn-warning">Detaylar</button></td>
+    <td><button  routerLink="/car/update/{{car.carId}}" class="btn btn-warning" >Güncelle</button></td>
   </tr>
 </table>

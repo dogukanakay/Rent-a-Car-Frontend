@@ -36,9 +36,14 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
-  getCarByCarId(carId:number):Observable<EntityResponseModel<Car>>{
+  getCarDetailsByCarId(carId:number):Observable<EntityResponseModel<Car>>{
     let newPath = this.apiUrl+"cars/getcardetailsbycarid?carId="+carId;
     return this.httpClient.get<EntityResponseModel<Car>>(newPath);
+  }
+
+  getCarByCarId(carId:number):Observable<EntityResponseModel<CarPost>>{
+    let newPath = this.apiUrl+"cars/getcarbycarid?carId="+carId;
+    return this.httpClient.get<EntityResponseModel<CarPost>>(newPath);
   }
   getImagesByCarId(carId:number):Observable<ListResponseModel<Image>>{
     let newPath = this.apiUrl+"carimages/getbycarid?carId="+carId;
@@ -48,6 +53,11 @@ export class CarService {
 
   carAdd(carPost:CarPost):Observable<ResponseModel>{
     let newPath = this.apiUrl+"cars/add"
+    return this.httpClient.post<ResponseModel>(newPath,carPost)
+  }
+
+  carUpdate(carPost:CarPost):Observable<ResponseModel>{
+    let newPath = this.apiUrl+"cars/update"
     return this.httpClient.post<ResponseModel>(newPath,carPost)
   }
 }

@@ -62,7 +62,7 @@ export class PaymentComponent implements OnInit{
     const end = new Date(this.rentalPost.returnDate);
     const differenceInMilliseconds = end.getTime() - start.getTime();
     const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-    this.carService.getCarByCarId(carId).subscribe(response=>{
+    this.carService.getCarDetailsByCarId(carId).subscribe(response=>{
       this.toplamTutar = response.data.dailyPrice * differenceInDays
       
     })
