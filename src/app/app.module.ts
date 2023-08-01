@@ -13,7 +13,7 @@ import { ColorComponent } from './components/color/color.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { NaviComponent } from './components/navi/navi.component';
-import { CarDetailsComponent } from './components/car-details/car-details.component';
+import { CarDetailsComponent } from './components/car/car-details/car-details.component';
 import { MainComponent } from './components/main/main.component';
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,6 +24,8 @@ import { BrandAddComponent } from './components/brand/brand-add/brand-add/brand-
 import { ColorAddComponent } from './components/color/color-add/color-add/color-add.component';
 import { CarAddComponent } from './components/car/car-add/car-add/car-add.component';
 import { CarUpdateComponent } from './components/car/car-update/car-update/car-update.component';
+import { ColorUpdateComponent } from './components/color/color-update/color-update/color-update.component';
+import { BrandUpdateComponent } from './components/brand/brand-update/brand-update/brand-update.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { CarUpdateComponent } from './components/car/car-update/car-update/car-u
     ColorAddComponent,
     CarAddComponent,
     CarUpdateComponent,
+    ColorUpdateComponent,
+    BrandUpdateComponent,
     
   
   ],

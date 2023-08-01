@@ -7,13 +7,17 @@
                     <div class="mb-3">
                         <label for="brandId" >Marka</label>
                         <div class="form-group">
-                            <input type="number" id="brandId" formControlName="brandId" class="form-control" placeholder="Marka"/>
+                            <select id="brandId" formControlName="brandId" class="form-control" placeholder="Marka">
+                                <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="colorId" >Renk</label>
                         <div class="form-group">
-                            <input type="number" id="colorId" formControlName="colorId" class="form-control" placeholder="Renk"/>
+                            <select id="colorId" formControlName="colorId" class="form-control" placeholder="Renk">
+                                <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">

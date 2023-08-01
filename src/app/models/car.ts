@@ -8,7 +8,7 @@ export interface Car{
 }
 
 export interface CarPost{
-    Id:number
+    id:number
     brandId:number
     colorId:number
     modelYear:number

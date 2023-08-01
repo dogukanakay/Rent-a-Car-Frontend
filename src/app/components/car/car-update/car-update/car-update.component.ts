@@ -36,6 +36,8 @@ export class CarUpdateComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.getCarByCarId(params['carId']);
     });
+   
+  
   }
 
   getCarByCarId(carId: number) {
@@ -43,7 +45,7 @@ export class CarUpdateComponent implements OnInit {
       next: (response) => {
         this.car = response.data;
         this.carUpdateForm.patchValue({
-          Id: carId,
+          id: carId,
           brandId: this.car.brandId,
           colorId: this.car.colorId,
           modelYear: this.car.modelYear,
@@ -56,7 +58,7 @@ export class CarUpdateComponent implements OnInit {
 
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
-      Id: [{ value: '', disabled: true }, Validators.required],
+      id: [{ value: '', disabled: true }, Validators.required],
       brandId: ['', Validators.required],
       colorId: ['', Validators.required],
       modelYear: ['', Validators.required],
@@ -84,6 +86,7 @@ export class CarUpdateComponent implements OnInit {
   carUpdate() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
+      carModel.id=this.car.id
       this.carService.carUpdate(carModel).subscribe({
         next: (response) => {
           this.toastrService.success(response.message, 'Başarılı');
