@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { Image } from 'src/app/models/image';
 import { Rental } from 'src/app/models/rental';
-import { RentalPost } from 'src/app/models/rentalPost';
+import { RentalPost } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { RentalService } from 'src/app/services/rental.service';
 

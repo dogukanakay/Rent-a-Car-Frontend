@@ -12,16 +12,28 @@
       <th>Marka Adı</th>
       <th>Model Adı</th>
       <th>Renk</th>
+      <th>Vites Tipi</th>
+      <th>Yakıt Tipi</th>
+      <th>Araç Sınıfı</th>
+      <th>Konumu</th>
       <th>Model Yılı</th>
+      <th>Findex Puanı</th>
+      <th>Açıklama</th>
       <th>Gunluk Ucreti</th>
     </tr>
   </thead>
 
   <tr>
     <td>{{ car.brandName }}</td>
-    <td>{{ car.carName }}</td>
+    <td>{{ car.modelName }}</td>
     <td>{{ car.colorName }}</td>
+    <td>{{ car.gearTypeName }}</td>
+    <td>{{ car.fuelTypeName }}</td>
+    <td>{{ car.className }}</td>
+    <td>{{ car.locationName }}</td>
     <td>{{ car.modelYear }}</td>
+    <td>{{ car.findexScore }}</td>
+    <td>{{ car.description }}</td>
     <td>{{ car.dailyPrice | currency: '₺' }}</td>
   </tr>
   <div *ngFor="let image of images">

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
-import { Rental } from '../models/rental';
+import { Rental, RentalFilter } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
-import { RentalPost } from '../models/rentalPost';
+import { RentalPost } from '../models/rental';
 import { EntityResponseModel } from '../models/entityResponseModel';
 import { JsonPipe } from '@angular/common';
 
@@ -25,9 +25,9 @@ export class RentalService {
     return savedRentalPostInformation? JSON.parse(savedRentalPostInformation) : null;
   }
 
-  getRentals():Observable<ListResponseModel<Rental>>{
+  getRentals(rentalFilter:RentalFilter):Observable<ListResponseModel<Rental>>{
     let newPath = this.apiUrl + "/getdetails"
-    return this.httpClient.get<ListResponseModel<Rental>>(newPath)
+    return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
   }
   addRental(rentalPost:RentalPost):Observable<ResponseModel>{
     let newPath = this.apiUrl + "/add"

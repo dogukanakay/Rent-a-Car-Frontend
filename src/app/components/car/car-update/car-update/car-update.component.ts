@@ -86,7 +86,7 @@ export class CarUpdateComponent implements OnInit {
   carUpdate() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
-      carModel.id=this.car.id
+      carModel.id=this.car.carId
       this.carService.carUpdate(carModel).subscribe({
         next: (response) => {
           this.toastrService.success(response.message, 'Başarılı');

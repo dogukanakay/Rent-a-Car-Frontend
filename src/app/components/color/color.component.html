@@ -19,8 +19,8 @@
 
     <tr *ngFor="let color of colors | filterColor:filterText" >
         <ul class="list-group" style="background-color: azure;">
-            <li  (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.id}}" [class]="getCurrentColorClass(color)">{{color.name}} 
-                <button routerLink="color/update/{{color.id}}/{{color.name}}" class="btn btn-warning" style="width: fit-content;">Güncelle</button>
+            <li  (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.colorId}}" [class]="getCurrentColorClass(color)">{{color.colorName}} 
+                <button routerLink="color/update/{{color.colorId}}/{{color.colorName}}" class="btn btn-warning" style="width: fit-content;">Güncelle</button>
             </li>
             
             

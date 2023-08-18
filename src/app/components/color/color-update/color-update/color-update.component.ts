@@ -26,8 +26,8 @@ export class ColorUpdateComponent implements OnInit {
     this.activatedRoute.params.subscribe((params)=>{
       this.colorId = params["colorId"]
       this.colorUpdateForm.patchValue({
-        id : params["colorId"],
-        name : params["colorName"]
+        colorId : params["colorId"],
+        colorName : params["colorName"]
       })
     })
   }
@@ -36,8 +36,8 @@ export class ColorUpdateComponent implements OnInit {
 
   createColorUpdateForm(){
     this.colorUpdateForm = this.formBuilder.group({
-      id: [{value :"", disabled:true}, Validators.required],
-      name:["", Validators.required]
+      colorId: [{value :"", disabled:true}, Validators.required],
+      colorName:["", Validators.required]
     })
   }
   
@@ -46,7 +46,7 @@ export class ColorUpdateComponent implements OnInit {
   colorUpdate(){
     if(this.colorUpdateForm.valid){
       let colorModel = Object.assign({},this.colorUpdateForm.value )
-      colorModel.id = this.colorId
+      colorModel.colorId = this.colorId
       this.colorService.colorUpdate(colorModel).subscribe({
         next: response=>{
           this.toastrService.success(response.message,"Güncelleme Başarılı")

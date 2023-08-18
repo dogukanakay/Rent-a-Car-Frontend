@@ -8,7 +8,7 @@
                         <label for="brandId" >Marka</label>
                         <div class="form-group">
                             <select id="brandId" formControlName="brandId" class="form-control" placeholder="Marka">
-                                <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+                                <option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.brandName}}</option>
                             </select>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                         <label for="colorId" >Renk</label>
                         <div class="form-group">
                             <select id="colorId" formControlName="colorId" class="form-control" placeholder="Renk">
-                                <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+                                <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
                             </select>
                         </div>
                     </div>

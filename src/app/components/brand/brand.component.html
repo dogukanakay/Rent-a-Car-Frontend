@@ -19,8 +19,8 @@
 
     <tr *ngFor="let brand of brands | filterBrand:filterText"  >
         <ul class="list-group" style="background-color: azure;">
-            <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" [class]="getCurrentBrandClass(brand)">{{brand.name}} 
-                <button  routerLink="/brand/update/{{brand.id}}/{{brand.name}}" class="btn btn-warning" >Güncelle</button>
+            <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}" [class]="getCurrentBrandClass(brand)">{{brand.brandName}} 
+                <button  routerLink="/brand/update/{{brand.brandId}}/{{brand.brandName}}" class="btn btn-warning" >Güncelle</button>
             </li>
             
         </ul>

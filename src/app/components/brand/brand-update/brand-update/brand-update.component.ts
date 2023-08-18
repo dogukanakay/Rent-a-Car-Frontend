@@ -25,8 +25,8 @@ export class BrandUpdateComponent implements OnInit {
     this.activatedRoute.params.subscribe((params)=>{
       this.brandId = params["brandId"]
       this.brandUpdateForm.patchValue({
-        id : params["brandId"],
-        name : params["brandName"]
+        brandId : params["brandId"],
+        brandName : params["brandName"]
       })
     })
   }
@@ -35,8 +35,8 @@ export class BrandUpdateComponent implements OnInit {
 
   createBrandUpdateForm(){
     this.brandUpdateForm = this.formBuilder.group({
-      id: [{value :"", disabled:true}, Validators.required],
-      name:["", Validators.required]
+      brandId: [{value :"", disabled:true}, Validators.required],
+      brandName:["", Validators.required]
     })
   }
   
@@ -45,7 +45,7 @@ export class BrandUpdateComponent implements OnInit {
   brandUpdate(){
     if(this.brandUpdateForm.valid){
       let brandModel = Object.assign({},this.brandUpdateForm.value )
-      brandModel.id = this.brandId
+      brandModel.brandId = this.brandId
       this.brandService.brandUpdate(brandModel).subscribe({
         next: response=>{
           this.toastrService.success(response.message,"Güncelleme Başarılı")

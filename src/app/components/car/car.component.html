@@ -9,7 +9,7 @@
   <div>
     <label for="colors">Renkler:</label>
     <select id="colors" name="colors" [(ngModel)]="selectedColorId" >
-      <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+      <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
       
     </select>
     
@@ -17,7 +17,7 @@
     
     <label for="brands">Markalar: </label>
     <select id="brands" name="brands" [(ngModel)] = "selectedBrandId">
-      <option *ngFor="let brand of brands" [value] ="brand.id">{{brand.name}}</option>
+      <option *ngFor="let brand of brands" [value] ="brand.brandId">{{brand.brandName}}</option>
     
     </select>
     <br><br>
@@ -43,7 +43,13 @@
       <th>Marka Adı</th>
       <th>Model Adı</th>
       <th>Renk</th>
+      <th>Vites Tipi</th>
+      <th>Yakıt Tipi</th>
+      <th>Araç Sınıfı</th>
+      <th>Konumu</th>
       <th>Model Yılı</th>
+      <th>Findex Puanı</th>
+      <th>Açıklama</th>
       <th>Gunluk Ucreti</th>
       <th>Detaylar</th>
       <th>Güncelle</th>
@@ -54,11 +60,17 @@
     *ngFor="let car of cars | filterCar:filterText"
     
   >
-    <td>{{ car.brandName }}</td>
-    <td>{{ car.carName }}</td>
-    <td>{{ car.colorName }}</td>
-    <td>{{ car.modelYear }}</td>
-    <td>{{ car.dailyPrice | currency: '₺'}}</td>
+  <td>{{ car.brandName }}</td>
+  <td>{{ car.modelName }}</td>
+  <td>{{ car.colorName }}</td>
+  <td>{{ car.gearTypeName }}</td>
+  <td>{{ car.fuelTypeName }}</td>
+  <td>{{ car.className }}</td>
+  <td>{{ car.locationName }}</td>
+  <td>{{ car.modelYear }}</td>
+  <td>{{ car.findexScore }}</td>
+  <td>{{ car.description }}</td>
+  <td>{{ car.dailyPrice | currency: '₺' }}</td>
     <td><button (click)="setCurrentCar(car)" routerLink="/cars/{{ car.carId }}" class="btn btn-warning">Detaylar</button></td>
     <td><button  routerLink="/car/update/{{car.carId}}" class="btn btn-warning" >Güncelle</button></td>
   </tr>
