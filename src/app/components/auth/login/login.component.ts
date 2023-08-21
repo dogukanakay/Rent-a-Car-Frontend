@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   userLoginForm:FormGroup
 
-  constructor(private authService:AuthService, private formBuilder:FormBuilder, private toastrService:ToastrService) {
+  constructor(private authService:AuthService, private formBuilder:FormBuilder, private toastrService:ToastrService, private localStorageService:LocalStorageService) {
     
   }
   
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe({
         next: response=>{
           this.toastrService.success("Giriş Başarılı","Başarılı")
-          console.log(response)
+          this.localStorageService.setItem('token',response.data.token)
+          console.log(response.data.token)
         },
         error: responseError=>{
           console.log(responseError)

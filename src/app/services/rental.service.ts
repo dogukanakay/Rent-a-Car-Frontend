@@ -7,12 +7,13 @@ import { ResponseModel } from '../models/responseModel';
 import { RentalPost } from '../models/rental';
 import { EntityResponseModel } from '../models/entityResponseModel';
 import { JsonPipe } from '@angular/common';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalService {
-  apiUrl='https://localhost:44338/api/Rentals'
+  apiUrl=environment.apiUrl
   constructor(private httpClient:HttpClient) { }
   private rentalPostKey = "rental_post_key"
   
@@ -26,16 +27,16 @@ export class RentalService {
   }
 
   getRentals(rentalFilter:RentalFilter):Observable<ListResponseModel<Rental>>{
-    let newPath = this.apiUrl + "/getdetails"
+    let newPath = this.apiUrl + "rentals/getdetails"
     return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
   }
   addRental(rentalPost:RentalPost):Observable<ResponseModel>{
-    let newPath = this.apiUrl + "/add"
+    let newPath = this.apiUrl + "rentals/add"
     return this.httpClient.post<ResponseModel>(newPath,rentalPost);
   }
   
   isRentable(rentalPost:RentalPost){
-    let newPath = this.apiUrl + "/isrentable"
+    let newPath = this.apiUrl + "rentals/isrentable"
     return this.httpClient.post<ResponseModel>(newPath, rentalPost);
   }
 

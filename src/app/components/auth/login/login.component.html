@@ -11,13 +11,13 @@
                 <p class="text-white-50 mb-5">Lütfen email adresinizi ve şifrenizi girin.</p>
                 <form [formGroup]="userLoginForm">
                     <div class="form-outline form-white mb-4">
-                    <input type="email" id="typeEmailX" class="form-control form-control-lg" formControlName="email" />
-                    <label class="form-label" for="typeEmailX">Email</label>
+                    <input type="email" id="email" class="form-control form-control-lg" formControlName="email" autocomplete="email" />
+                    <label class="form-label" for="email">Email</label>
                     </div>
     
                     <div class="form-outline form-white mb-4">
-                    <input type="password" id="typePasswordX" class="form-control form-control-lg" formControlName="password" />
-                    <label class="form-label" for="typePasswordX">Şifre</label>
+                    <input type="password" id="password" class="form-control form-control-lg" formControlName="password" autocomplete="current-password" />
+                    <label class="form-label" for="password">Şifre</label>
                     </div>
                 </form>
   

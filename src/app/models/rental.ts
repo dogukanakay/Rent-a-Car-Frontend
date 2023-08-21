@@ -1,4 +1,4 @@
-export interface Rental{
+export interface Rental extends RentalFilter{
     brandName:string
     customerName:string
     rentDate:Date
@@ -12,7 +12,7 @@ export interface RentalPost{
     returnDate:Date
 }
 
-export interface RentalFilter{
+export class RentalFilter{
     carId?:number
     customerId?:number
 }

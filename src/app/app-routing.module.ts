@@ -12,6 +12,7 @@ import { ColorUpdateComponent } from './components/color/color-update/color-upda
 import { BrandUpdateComponent } from './components/brand/brand-update/brand-update/brand-update.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { loginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:MainComponent},
@@ -21,9 +22,9 @@ const routes: Routes = [
   {path:"cars/color/:colorId/brand/:brandId", component:CarComponent},
   {path:"cars/:carId", component:CarDetailsComponent},
   {path:"cars/:carId/payment", component:PaymentComponent},
-  {path:"brand/add", component:BrandAddComponent},
-  {path:"color/add", component:ColorAddComponent},
-  {path:"car/add", component:CarAddComponent},
+  {path:"brand/add", component:BrandAddComponent, canActivate:[loginGuard]},
+  {path:"color/add", component:ColorAddComponent, canActivate:[loginGuard]},
+  {path:"car/add", component:CarAddComponent, canActivate:[loginGuard]},
   {path:"car/update/:carId", component:CarUpdateComponent},
   {path:"color/update/:colorId/:colorName", component:ColorUpdateComponent},
   {path:"brand/update/:brandId/:brandName", component:BrandUpdateComponent},

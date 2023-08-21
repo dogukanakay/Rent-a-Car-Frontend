@@ -21,16 +21,8 @@ export class CarComponent implements OnInit {
   currentCar: Car;
   dataLoaded = false;
   filterText = '';
-  carDetailFilter: CarDetailFilter = {
-    locationId: null,
-    brandId: null,
-    modelId: null,
-    gearId: null,
-    fuelId: null,
-    colorId: null,
-    rentDate: null,
-    returnDate: null,
-  };
+  carDetailFilter: CarDetailFilter = new CarDetailFilter();
+    
 
   constructor(
     private carService: CarService,
@@ -45,7 +37,8 @@ export class CarComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['brandId']) {
         this.carDetailFilter.brandId = params['brandId'];
-      } else if (params['colorId']) {
+      }
+      if (params['colorId']) {
         this.carDetailFilter.colorId = params['colorId'];
       }
 
@@ -60,7 +53,6 @@ export class CarComponent implements OnInit {
 
   getCars() {
     this.carService.getCars(this.carDetailFilter).subscribe((response) => {
-      console.log(response);
       this.cars = response.data;
       this.dataLoaded = true;
     });

@@ -23,7 +23,7 @@ export interface CarPost{
 }
 
 
-export interface CarDetailFilter{
+export class CarDetailFilter{
     locationId?:number
     brandId?:number
     modelId?:number
