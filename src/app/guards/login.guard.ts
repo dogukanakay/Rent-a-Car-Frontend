@@ -10,23 +10,22 @@ import { ToastrService } from 'ngx-toastr';
 class IsLoginGuard {
 
   constructor(private authService:AuthService, private router:Router, private toastrService:ToastrService) {}
-  isAuth:Boolean=true;
+
   canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot){
 
-    this.authService.isAuthenticated().subscribe({
+    return this.authService.isAuthenticated().subscribe({
       next: response => {
-        this.isAuth=true;
+        return true
         
       },
       error: errorResponse => {
         this.toastrService.info("Önce Giriş Yap");
         this.router.navigate(['login']);
-        this.isAuth =false;
+        return false
       }
       
     })
-    console.log(this.isAuth);
-    return this.isAuth;
+    
   }
 }
 

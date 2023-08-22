@@ -44,7 +44,6 @@ export class CarComponent implements OnInit {
 
       this.getCars();
     });
-    console.log(this.carDetailFilter);
   }
 
   setCurrentCar(car: Car) {

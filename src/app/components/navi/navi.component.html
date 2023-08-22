@@ -25,9 +25,13 @@
           </ul>
         </li>
       </ul>
-      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <button class="btn btn-outline-success" routerLink="login">Giriş Yap</button>
-        <button class="btn btn-outline-success" routerLink="register">Kaydol</button>
+      <div *ngIf="!isLoggedIn" class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <button class="btn btn-outline-success"  routerLink="login">Giriş Yap</button>
+        <button class="btn btn-outline-success"  routerLink="register">Kaydol</button>
+      </div>
+      <div *ngIf="isLoggedIn" class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <button class="btn btn-outline-success"  routerLink="/">Profile</button>
+        <button class="btn btn-outline-success" (click)="logout()" routerLink="/">Çıkış Yap</button>
       </div>
     </div>
   </div>
