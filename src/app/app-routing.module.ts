@@ -13,6 +13,7 @@ import { BrandUpdateComponent } from './components/brand/brand-update/brand-upda
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { loginGuard } from './guards/login.guard';
+import { UserProfileComponent } from './components/user/profile/user-profile.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:MainComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:"color/update/:colorId/:colorName", component:ColorUpdateComponent},
   {path:"brand/update/:brandId/:brandName", component:BrandUpdateComponent},
   {path:"login", component:LoginComponent},
-  {path:"register", component:RegisterComponent}
+  {path:"register", component:RegisterComponent},
+  {path:"profile", component:UserProfileComponent, canActivate:[loginGuard]}
 ];
 
 @NgModule({

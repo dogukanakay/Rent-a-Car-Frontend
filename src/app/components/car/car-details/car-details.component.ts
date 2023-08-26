@@ -76,22 +76,24 @@ export class CarDetailsComponent implements OnInit {
     this.rentalPost.rentDate = this.rentDate;
     this.rentalPost.returnDate = this.returnDate;
     console.log(this.car.carId,1,this.rentDate,this.returnDate)
-    this.rentalService.isRentable(this.rentalPost).subscribe(response=>{
-      console.log(response)
-      
-      if(response){
-        this.toastrService.success("Araç Kiralanabilir. Ödeme Sayfasına Yönlendiriliyorsunuz.","Araç Durumu")
-        this.router.navigate(['/cars', this.car.carId, 'payment']);
-        this.rentalService.saveRentalPostInformation(this.rentalPost);
-      }else{
-        this.toastrService.error("Bu tarihlerde bu araç kiralanamaz", "Araç Durumu")
-      }
-
-      
-    },responseError=>{
-      if(responseError.error.Errors.length>0){
-        for(let i=0; i<responseError.error.Errors.length; i++){
-          this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Doğrulama hatasi")
+    this.rentalService.isRentable(this.rentalPost).subscribe({
+      next:response=>{
+        console.log(response)
+        
+        if(response){
+          this.toastrService.success("Araç Kiralanabilir. Ödeme Sayfasına Yönlendiriliyorsunuz.","Araç Durumu")
+          this.router.navigate(['/cars', this.car.carId, 'payment']);
+          this.rentalService.saveRentalPostInformation(this.rentalPost);
+        }else{
+          this.toastrService.error("Bu tarihlerde bu araç kiralanamaz", "Araç Durumu")
+        }
+  
+        
+      },error: responseError=>{
+        if(responseError.error.Errors.length>0){
+          for(let i=0; i<responseError.error.Errors.length; i++){
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Doğrulama hatasi")
+          }
         }
       }
     })

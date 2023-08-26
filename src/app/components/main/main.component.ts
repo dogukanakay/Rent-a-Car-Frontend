@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CarDetailFilter } from 'src/app/models/car';
+import { CarService } from 'src/app/services/car.service';
 
 
 @Component({
@@ -6,4 +8,22 @@ import { Component } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent  {}
+export class MainComponent implements OnInit  {
+
+  rentDate :Date;
+  returnDate : Date;
+  carDetailFilter = new CarDetailFilter();
+
+  constructor(private carService:CarService) {}
+
+  ngOnInit(): void {
+    
+  }
+
+
+  setCarDetailFilter(){
+    this.carDetailFilter.rentDate = this.rentDate;
+    this.carDetailFilter.returnDate = this.returnDate;
+    this.carService.setCarDetailFilter(this.carDetailFilter);
+  }
+}

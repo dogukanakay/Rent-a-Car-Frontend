@@ -1,13 +1,24 @@
+
 <div class="content">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
+    <div class="col-md-9" >
+        <div class="card" >
+            <div class="card-header"><h5 class="title">Araba Ekle</h5></div>
             <div class="card-body">
                 <form [formGroup]="carUpdateForm">
                     <div class="mb-3">
-                        <label for="id" >Araç Numarası</label>
+                        <label for="locationId" >Konum</label>
                         <div class="form-group">
-                            <input type="number" id="id" formControlName="id" class="form-control" placeholder="Araç Numarası"/>
+                            <select id="locationId" formControlName="locationId" class="form-control" placeholder="Konum">
+                                <option *ngFor="let location of locations" [value]="location.locationId">{{location.locationName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="classId" >Araç Sınıfı</label>
+                        <div class="form-group">
+                            <select id="classId" formControlName="classId" class="form-control" placeholder="Araç Sınıfı">
+                                <option *ngFor="let class of carClasses" [value]="class.classId">{{class.className}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -19,10 +30,10 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="colorId" >Renk</label>
+                        <label for="modelId" >Model</label>
                         <div class="form-group">
-                            <select id="colorId" formControlName="colorId" class="form-control" placeholder="Renk">
-                                <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
+                            <select id="modelId" formControlName="modelId" class="form-control" placeholder="Model">
+                                <option *ngFor="let model of models" [value]="model.modelId">{{model.modelName}}</option>
                             </select>
                         </div>
                     </div>
@@ -33,11 +44,43 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="gearId" >Vites Tipi</label>
+                        <div class="form-group">
+                            <select id="gearId" formControlName="gearId" class="form-control" placeholder="Vites Tipi">
+                                <option *ngFor="let gear of gears" [value]="gear.gearId">{{gear.gearName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fuelId" >Yakıt Tipi</label>
+                        <div class="form-group">
+                            <select id="fuelId" formControlName="fuelId" class="form-control" placeholder="Yakıt Tipi">
+                                <option *ngFor="let fuel of fuels" [value]="fuel.fuelId">{{fuel.fuelName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="colorId" >Renk</label>
+                        <div class="form-group">
+                            <select id="colorId" formControlName="colorId" class="form-control" placeholder="Renk">
+                                <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div class="mb-3">
                         <label for="dailyPrice" >Günlük Fiyatı</label>
                         <div class="form-group">
                             <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" placeholder="Günlük Fiyatı"/>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <label for="findexScore" >Findex Puanı</label>
+                        <div class="form-group">
+                            <input type="number" id="findexScore" formControlName="findexScore" class="form-control" placeholder="Gerekli Findex Puanı"/>
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="description" >Açıklama</label>
                         <div class="form-group">
@@ -49,7 +92,7 @@
 
             </div>
             <div class="card-footer">
-                <button class="btn btn-fill btn-primary" (click)="carUpdate()">Güncelle</button>
+                <button class="btn btn-fill btn-primary" (click)="carUpdate()" >Güncelle</button>
             </div>
         </div>
 

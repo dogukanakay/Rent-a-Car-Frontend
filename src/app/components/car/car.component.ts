@@ -21,7 +21,7 @@ export class CarComponent implements OnInit {
   currentCar: Car;
   dataLoaded = false;
   filterText = '';
-  carDetailFilter: CarDetailFilter = new CarDetailFilter();
+  carDetailFilter: CarDetailFilter = this.carService.getCarDetailFilter();
     
 
   constructor(

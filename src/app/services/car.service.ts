@@ -13,11 +13,17 @@ import { environment } from 'src/environments/environment.development';
 })
 export class CarService {
   apiUrl = environment.apiUrl
-
+  carDetailFilter = new CarDetailFilter();
 
   constructor(private httpClient : HttpClient) { }
   
   
+  setCarDetailFilter(carDetailFilter:CarDetailFilter){
+    this.carDetailFilter = carDetailFilter
+  }
+  getCarDetailFilter(){
+    return this.carDetailFilter;
+  }
   getCars(carDetailFilter:CarDetailFilter):Observable<ListResponseModel<Car>>{
     let newPath = this.apiUrl +"cars/getcardetails"
     return this.httpClient.post<ListResponseModel<Car>>(newPath,carDetailFilter);

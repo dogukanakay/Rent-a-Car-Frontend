@@ -4,10 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { CarPost } from 'src/app/models/car';
+import { CarClass } from 'src/app/models/carClass';
 import { Color } from 'src/app/models/color';
+import { Fuel } from 'src/app/models/fuel';
+import { Gear } from 'src/app/models/gear';
+import { Model } from 'src/app/models/model';
+import { RentalLocation } from 'src/app/models/rentalLocation';
 import { BrandService } from 'src/app/services/brand.service';
+import { CarClassService } from 'src/app/services/car-class.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { FuelService } from 'src/app/services/fuel.service';
+import { GearService } from 'src/app/services/gear.service';
+import { LocationService } from 'src/app/services/location.service';
+import { ModelService } from 'src/app/services/model.service';
 
 @Component({
   selector: 'app-car-update',
@@ -19,25 +29,38 @@ export class CarUpdateComponent implements OnInit {
   car: CarPost;
   colors: Color[];
   brands: Brand[];
+  locations: RentalLocation[];
+  models: Model[];
+  gears: Gear[];
+  fuels: Fuel[];
+  carClasses: CarClass[];
 
   constructor(
     private carService: CarService,
-    private toastrService: ToastrService,
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
+    private colorService: ColorService,
     private brandService: BrandService,
-    private colorService: ColorService
+    private activatedRoute: ActivatedRoute,
+    private carClassService: CarClassService,
+    private fuelService: FuelService,
+    private modelService: ModelService,
+    private gearService: GearService,
+    private locationService: LocationService
   ) {}
 
   ngOnInit(): void {
-    this.getBrands();
     this.getColors();
+    this.getBrands();
+    this.getCarClasses();
+    this.getFuels();
+    this.getLocations();
+    this.getModels();
+    this.getGears();
     this.createCarUpdateForm();
     this.activatedRoute.params.subscribe((params) => {
       this.getCarByCarId(params['carId']);
     });
-   
-  
   }
 
   getCarByCarId(carId: number) {
@@ -45,11 +68,17 @@ export class CarUpdateComponent implements OnInit {
       next: (response) => {
         this.car = response.data;
         this.carUpdateForm.patchValue({
-          id: carId,
+          carId: this.car.carId,
+          classId: this.car.classId,
+          locationId: this.car.locationId,
           brandId: this.car.brandId,
+          modelId: this.car.modelId,
+          gearId: this.car.gearId,
+          fuelId: this.car.fuelId,
           colorId: this.car.colorId,
           modelYear: this.car.modelYear,
           dailyPrice: this.car.dailyPrice,
+          findexScore: this.car.findexScore,
           description: this.car.description,
         });
       },
@@ -58,11 +87,17 @@ export class CarUpdateComponent implements OnInit {
 
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
-      id: [{ value: '', disabled: true }, Validators.required],
+      carId: [{ value: '', disabled: true }, Validators.required],
+      classId: ['', Validators.required],
+      locationId: ['', Validators.required],
       brandId: ['', Validators.required],
+      modelId: ['', Validators.required],
+      gearId: ['', Validators.required],
       colorId: ['', Validators.required],
+      fuelId: ['', Validators.required],
       modelYear: ['', Validators.required],
       dailyPrice: ['', Validators.required],
+      findexScore: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
@@ -83,10 +118,50 @@ export class CarUpdateComponent implements OnInit {
     });
   }
 
+  getModels() {
+    this.modelService.getModels().subscribe({
+      next: (response) => {
+        this.models = response.data;
+      },
+    });
+  }
+
+  getCarClasses() {
+    this.carClassService.getCarClasses().subscribe({
+      next: (response) => {
+        this.carClasses = response.data;
+      },
+    });
+  }
+
+  getLocations() {
+    this.locationService.getRentalLocations().subscribe({
+      next: (response) => {
+        this.locations = response.data;
+      },
+    });
+  }
+
+  getFuels() {
+    this.fuelService.getFuelTypes().subscribe({
+      next: (response) => {
+        this.fuels = response.data;
+      },
+    });
+  }
+
+  getGears() {
+    this.gearService.getGearTypes().subscribe({
+      next: (response) => {
+        this.gears = response.data;
+      },
+    });
+  }
+
   carUpdate() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
-      carModel.id=this.car.carId
+      carModel.carId = this.car.carId;
       this.carService.carUpdate(carModel).subscribe({
         next: (response) => {
           this.toastrService.success(response.message, 'Başarılı');

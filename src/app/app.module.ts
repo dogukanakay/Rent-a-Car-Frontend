@@ -28,6 +28,7 @@ import { BrandUpdateComponent } from './components/brand/brand-update/brand-upda
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { UserProfileComponent } from './components/user/profile/user-profile.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BrandUpdateComponent,
     LoginComponent,
     RegisterComponent,
+    UserProfileComponent,
     
   
   ],

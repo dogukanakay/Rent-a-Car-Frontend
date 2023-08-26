@@ -29,6 +29,7 @@ export class AuthService {
   }
   logout(){
     this.localStorageServis.removeItem('token')
+    this.localStorageServis.removeItem('user')
     this.loggedIn = false;
     this.isLoggedInChanged.next(false);
   }

@@ -15,10 +15,16 @@ export interface Car extends CarDetailFilter{
 
 export interface CarPost{
     carId:number
+    locationId:number
+    classId:number
     brandId:number
+    modelId:number
+    gearId:number
+    fuelId:number
     colorId:number
     modelYear:number
     dailyPrice:number
+    findexScore:number
     description:string
 }
 
