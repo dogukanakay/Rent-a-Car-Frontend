@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarDetailFilter } from 'src/app/models/car';
+import { RentalLocation } from 'src/app/models/rentalLocation';
 import { CarService } from 'src/app/services/car.service';
+import { LocationService } from 'src/app/services/location.service';
 
 
 @Component({
@@ -10,20 +12,26 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class MainComponent implements OnInit  {
 
-  rentDate :Date;
-  returnDate : Date;
+  locations : RentalLocation[];
   carDetailFilter = new CarDetailFilter();
 
-  constructor(private carService:CarService) {}
+
+  constructor(private carService:CarService, private locationService:LocationService) {}
 
   ngOnInit(): void {
-    
+    this.getLocations();
   }
 
-
+  
   setCarDetailFilter(){
-    this.carDetailFilter.rentDate = this.rentDate;
-    this.carDetailFilter.returnDate = this.returnDate;
     this.carService.setCarDetailFilter(this.carDetailFilter);
+  }
+
+  getLocations(){
+    this.locationService.getRentalLocations().subscribe({
+      next: response=>{
+        this.locations = response.data
+      }
+    })
   }
 }

@@ -6,26 +6,8 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-  <div>
-    <label for="colors">Renkler:</label>
-    <select id="colors" name="colors" [(ngModel)]="selectedColorId" >
-      <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
-      
-    </select>
-    
-    <br><br>
-    
-    <label for="brands">Markalar: </label>
-    <select id="brands" name="brands" [(ngModel)] = "selectedBrandId">
-      <option *ngFor="let brand of brands" [value] ="brand.brandId">{{brand.brandName}}</option>
-    
-    </select>
-    <br><br>
-    <button class="btn btn-primary" type="button" routerLink="/cars/color/{{ selectedColorId }}/brand/{{selectedBrandId}}">Filtrele</button>
-    <button class="btn btn-primary" style="margin-left:20px" routerLink="../car/add" >Araba Ekle</button>
-  </div>  
 <div class="mb-3">
-  <label for="filterText" class="form-label" >Araba ara</label>
+  <label for="filterText" class="form-label">Araba ara</label>
   <input
     type="text"
     [(ngModel)]="filterText"
@@ -37,7 +19,8 @@
 <div *ngIf="filterText.length > 2" class="alert alert-success">
   {{ filterText }} aradınız
 </div>
-<table *ngIf="dataLoaded == true" class="table table-success">
+<!--
+<table  class="table table-success">
   <thead>
     <tr>
       <th>Marka Adı</th>
@@ -53,25 +36,142 @@
       <th>Gunluk Ucreti</th>
       <th>Detaylar</th>
       <th>Güncelle</th>
-      </tr>
+    </tr>
   </thead>
 
-  <tr
-    *ngFor="let car of cars | filterCar:filterText"
-    
-  >
-  <td>{{ car.brandName }}</td>
-  <td>{{ car.modelName }}</td>
-  <td>{{ car.colorName }}</td>
-  <td>{{ car.gearTypeName }}</td>
-  <td>{{ car.fuelTypeName }}</td>
-  <td>{{ car.className }}</td>
-  <td>{{ car.locationName }}</td>
-  <td>{{ car.modelYear }}</td>
-  <td>{{ car.findexScore }}</td>
-  <td>{{ car.description }}</td>
-  <td>{{ car.dailyPrice | currency: '₺' }}</td>
-    <td><button (click)="setCurrentCar(car)" routerLink="/cars/{{ car.carId }}" class="btn btn-warning">Detaylar</button></td>
-    <td><button  routerLink="/car/update/{{car.carId}}" class="btn btn-warning" >Güncelle</button></td>
+  <tr *ngFor="let car of cars | filterCar : filterText">
+    <td>{{ car.brandName }}</td>
+    <td>{{ car.modelName }}</td>
+    <td>{{ car.colorName }}</td>
+    <td>{{ car.gearTypeName }}</td>
+    <td>{{ car.fuelTypeName }}</td>
+    <td>{{ car.className }}</td>
+    <td>{{ car.locationName }}</td>
+    <td>{{ car.modelYear }}</td>
+    <td>{{ car.findexScore }}</td>
+    <td>{{ car.description }}</td>
+    <td>{{ car.dailyPrice | currency : "₺" }}</td>
+    <td>
+      <button
+        (click)="setCurrentCar(car)"
+        routerLink="/cars/{{ car.carId }}"
+        class="btn btn-warning"
+      >
+        Detaylar
+      </button>
+    </td>
+    <td>
+      <button routerLink="/car/update/{{ car.carId }}" class="btn btn-warning">
+        Güncelle
+      </button>
+    </td>
   </tr>
 </table>
+-->
+<div class="container" *ngIf="dataLoaded == true">
+  <div class="row">
+    <div class="col-md-2 position-fixed" style="background-color: aqua;" >
+      <div>
+        <label for="colors">Renkler:</label>
+        <select id="colors" name="colors" [(ngModel)]="carDetailFilter.colorId">
+          <option [ngValue]="undefined">Hepsi</option>
+          <option *ngFor="let color of colors" [value]="color.colorId">
+            {{ color.colorName }}
+          </option>
+        </select>
+      </div>
+
+      <br />
+      <div>
+        <label for="brands">Markalar: </label>
+        <select id="brands" name="brands" [(ngModel)]="carDetailFilter.brandId">
+          <option [ngValue]="undefined">Hepsi</option>
+          <option *ngFor="let brand of brands" [value]="brand.brandId">
+            {{ brand.brandName }}
+          </option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <label for="gears">Vites: </label>
+        <select id="gears" name="gears" [(ngModel)]="carDetailFilter.gearId">
+          <option [ngValue]="undefined">Hepsi</option>
+          <option *ngFor="let gear of gears" [value]="gear.gearId">
+            {{ gear.gearName }}
+          </option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <label for="fuels">Yakıt: </label>
+        <select id="fuels" name="fuels" [(ngModel)]="carDetailFilter.fuelId">
+          <option [ngValue]="undefined">Hepsi</option>
+          <option *ngFor="let fuel of fuels" [value]="fuel.fuelId">
+            {{ fuel.fuelName }}
+          </option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <br /><br />
+        <button class="btn btn-primary" type="button" (click)="getCars()">
+          Filtrele
+        </button>
+        <br />
+        <br />
+        <button class="btn btn-primary" routerLink="../car/add">
+          Araba Ekle
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-10 offset-md-2 scrollable-content" >
+      <div class="row" *ngFor="let car of cars | filterCar : filterText">
+        <div class="col-md-6">
+          <img
+            [src]="imagePathPrefix + car.imagePath"
+            alt="Çekilen Resim"
+            class="img-fluid"
+          />
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h6>Marka</h6>
+              {{ car.brandName }}
+            </li>
+            <li class="list-group-item">
+              <h6>Model</h6>
+              {{ car.modelName }}
+            </li>
+            <li class="list-group-item">
+              <h6>Vites Tipi</h6>
+              {{ car.gearTypeName }}
+            </li>
+            <li class="list-group-item">
+              <h6>Renk</h6>
+              {{ car.colorName }}
+            </li>
+            <li class="list-group-item">
+              <h6>Yakıt Tipi</h6>
+              {{ car.fuelTypeName }}
+            </li>
+            <li class="list-group-item">
+              <h6>Günlük Ücret</h6>
+              {{ car.dailyPrice | currency : "₺" }}
+            </li>
+            <button
+              (click)="setCurrentCar(car)"
+              routerLink="/cars/{{ car.carId }}"
+              class="btn btn-warning"
+            >
+              Detaylar
+            </button>
+          </ul>
+          <br /><br /><br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

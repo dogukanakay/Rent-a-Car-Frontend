@@ -11,6 +11,7 @@ export interface Car extends CarDetailFilter{
     dailyPrice:number
     findexScore:number
     description:string
+    imagePath:string
 }
 
 export interface CarPost{

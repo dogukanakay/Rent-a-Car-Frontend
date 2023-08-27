@@ -1,0 +1,6 @@
+.scrollable-content {
+    max-height: calc(100vh - 40px); /* İçeriğin maksimum yüksekliği (100 viewport yüksekliğinden sol sütunun genişliği çıkarıldı) */
+    overflow-y: auto; /* İçeriğin kaydırılabilir olması için */
+    padding-left: 220px; /* Sol sütun genişliği kadar içerikten içeri çekiyoruz */
+  }
+  
