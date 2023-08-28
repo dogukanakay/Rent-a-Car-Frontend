@@ -1,0 +1,195 @@
+<div class="content">
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carUpdateForm">
+          <div class="mb-3">
+            <div class="form-group">
+              <div class="mb-3">
+                <label for="carId">Araç Numarası</label>
+                <div class="form-group">
+                  <input
+                    type="number"
+                    id="carId"
+                    formControlName="carId"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <label for="locationId">Konum</label>
+              <select
+                id="locationId"
+                formControlName="locationId"
+                class="form-control"
+                placeholder="Konum"
+              >
+                <option
+                  *ngFor="let location of locations"
+                  [value]="location.locationId"
+                >
+                  {{ location.locationName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="classId">Araç Sınıfı</label>
+            <div class="form-group">
+              <select
+                id="classId"
+                formControlName="classId"
+                class="form-control"
+                placeholder="Araç Sınıfı"
+              >
+                <option
+                  *ngFor="let class of carClasses"
+                  [value]="class.classId"
+                >
+                  {{ class.className }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="brandId">Marka</label>
+            <div class="form-group">
+              <select
+                id="brandId"
+                formControlName="brandId"
+                class="form-control"
+                placeholder="Marka"
+              >
+                <option *ngFor="let brand of brands" [value]="brand.brandId">
+                  {{ brand.brandName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="modelId">Model</label>
+            <div class="form-group">
+              <select
+                id="modelId"
+                formControlName="modelId"
+                class="form-control"
+                placeholder="Model"
+              >
+                <option *ngFor="let model of models" [value]="model.modelId">
+                  {{ model.modelName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="modelYear">Model Yılı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="modelYear"
+                formControlName="modelYear"
+                class="form-control"
+                placeholder="Model Yılı"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="gearId">Vites Tipi</label>
+            <div class="form-group">
+              <select
+                id="gearId"
+                formControlName="gearId"
+                class="form-control"
+                placeholder="Vites Tipi"
+              >
+                <option *ngFor="let gear of gears" [value]="gear.gearId">
+                  {{ gear.gearName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="fuelId">Yakıt Tipi</label>
+            <div class="form-group">
+              <select
+                id="fuelId"
+                formControlName="fuelId"
+                class="form-control"
+                placeholder="Yakıt Tipi"
+              >
+                <option *ngFor="let fuel of fuels" [value]="fuel.fuelId">
+                  {{ fuel.fuelName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="colorId">Renk</label>
+            <div class="form-group">
+              <select
+                id="colorId"
+                formControlName="colorId"
+                class="form-control"
+                placeholder="Renk"
+              >
+                <option *ngFor="let color of colors" [value]="color.colorId">
+                  {{ color.colorName }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="dailyPrice">Günlük Fiyatı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="dailyPrice"
+                formControlName="dailyPrice"
+                class="form-control"
+                placeholder="Günlük Fiyatı"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="findexScore">Findex Puanı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="findexScore"
+                formControlName="findexScore"
+                class="form-control"
+                placeholder="Gerekli Findex Puanı"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description">Açıklama</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="description"
+                formControlName="description"
+                class="form-control"
+                placeholder="Açıklama"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-warning" (click)="carUpdate()">
+          Güncelle
+        </button>
+        <button
+          class="btn btn-fill btn-primary"
+          style="margin-left: 20px"
+          routerLink="../../../car/update/image/{{ carId }}"
+        >
+          Resimleri Güncelle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

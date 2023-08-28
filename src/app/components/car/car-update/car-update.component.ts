@@ -27,6 +27,7 @@ import { ModelService } from 'src/app/services/model.service';
 export class CarUpdateComponent implements OnInit {
   carUpdateForm: FormGroup;
   car: CarPost;
+  carId:number;
   colors: Color[];
   brands: Brand[];
   locations: RentalLocation[];
@@ -50,6 +51,10 @@ export class CarUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.getCarByCarId(params['carId']);
+      this.carId = params['carId']
+    });
     this.getColors();
     this.getBrands();
     this.getCarClasses();
@@ -58,9 +63,7 @@ export class CarUpdateComponent implements OnInit {
     this.getModels();
     this.getGears();
     this.createCarUpdateForm();
-    this.activatedRoute.params.subscribe((params) => {
-      this.getCarByCarId(params['carId']);
-    });
+   
   }
 
   getCarByCarId(carId: number) {

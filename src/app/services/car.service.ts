@@ -39,10 +39,7 @@ export class CarService {
     let newPath = this.apiUrl+"cars/getcarbycarid?carId="+carId;
     return this.httpClient.get<EntityResponseModel<CarPost>>(newPath);
   }
-  getImagesByCarId(carId:number):Observable<ListResponseModel<Image>>{
-    let newPath = this.apiUrl+"carimages/getbycarid?carId="+carId;
-    return this.httpClient.get<ListResponseModel<Image>>(newPath);
-  }
+  
 
 
   carAdd(carPost:CarPost):Observable<ResponseModel>{

@@ -21,14 +21,17 @@ import { FilterCarPipe } from './pipes/filter-car.pipe';
 import { PaymentComponent } from './components/payment/payment.component';
 import { BrandAddComponent } from './components/brand/brand-add/brand-add/brand-add.component';
 import { ColorAddComponent } from './components/color/color-add/color-add/color-add.component';
-import { CarAddComponent } from './components/car/car-add/car-add/car-add.component';
-import { CarUpdateComponent } from './components/car/car-update/car-update/car-update.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { CarUpdateComponent } from './components/car/car-update/car-update.component';
 import { ColorUpdateComponent } from './components/color/color-update/color-update/color-update.component';
 import { BrandUpdateComponent } from './components/brand/brand-update/brand-update/brand-update.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserProfileComponent } from './components/user/profile/user-profile.component';
+import { CarImagesComponent } from './components/car/car-images/car-images.component';
+import { CarImageUpdateComponent } from './components/car/car-images/car-image-update/car-image-update.component';
+import { CarImageAddComponent } from './components/car/car-images/car-image-add/car-image-add.component';
 
 
 @NgModule({
@@ -55,6 +58,9 @@ import { UserProfileComponent } from './components/user/profile/user-profile.com
     LoginComponent,
     RegisterComponent,
     UserProfileComponent,
+    CarImagesComponent,
+    CarImageUpdateComponent,
+    CarImageAddComponent,
     
   
   ],

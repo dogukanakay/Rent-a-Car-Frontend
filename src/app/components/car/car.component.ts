@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car, CarDetailFilter } from 'src/app/models/car';
@@ -8,6 +8,7 @@ import { Fuel } from 'src/app/models/fuel';
 import { Gear } from 'src/app/models/gear';
 import { Image } from 'src/app/models/image';
 import { BrandService } from 'src/app/services/brand.service';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { FuelService } from 'src/app/services/fuel.service';
@@ -28,16 +29,18 @@ export class CarComponent implements OnInit {
   dataLoaded = false;
   filterText = '';
   carDetailFilter: CarDetailFilter = this.carService.getCarDetailFilter();
-  images: Image[];
+
   imagePathPrefix: string = 'https://localhost:44338/uploads/images/';
 
   constructor(
     private carService: CarService,
+    private carImageService:CarImageService,
     private colorService: ColorService,
     private brandService: BrandService,
     private gearService: GearService,
     private fuelService: FuelService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.getBrands();
@@ -59,8 +62,8 @@ export class CarComponent implements OnInit {
         this.dataLoaded = true;
       },
       error: (responseError) => {
-        console.log(responseError);
         this.toastrService.error(responseError.error.Message, 'HATA');
+        this.router.navigate(["/"]);
       },
     });
   }
