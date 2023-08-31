@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,10 +11,25 @@ import { UserService } from 'src/app/services/user.service';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService:UserService, private toastrService:ToastrService) {}
-
-
+  user:User;
+  dataLoaded:boolean=false;
   ngOnInit(): void {
-    
+    this.userService.getUserDetail().subscribe({
+      next: response=>{
+        this.user = response.data
+        console.log(this.user)
+        this.dataLoaded = true;
+      },
+      error: responseError=>{
+        this.toastrService.error(responseError.error ,"Hata")
+        this.dataLoaded=true;
+      }
+    })
+  }
+
+
+  updateProfile(){
+
   }
 
 }

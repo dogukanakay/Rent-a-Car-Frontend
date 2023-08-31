@@ -5,11 +5,14 @@ export interface Rental extends RentalFilter{
     returnDate:Date
 }
 
-export interface RentalPost{
+export class RentalPost{
     carId:number
+    pickUpLocationId:number
+    dropOffLocationId:number
     customerId:number
     rentDate:Date
     returnDate:Date
+    totalPrice:number
 }
 
 export class RentalFilter{

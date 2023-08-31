@@ -8,6 +8,7 @@ import { RentalPost } from '../models/rental';
 import { EntityResponseModel } from '../models/entityResponseModel';
 import { JsonPipe } from '@angular/common';
 import { environment } from 'src/environments/environment.development';
+import { Payment } from '../models/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,13 @@ export class RentalService {
     let newPath = this.apiUrl + "rentals/getdetails"
     return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
   }
-  addRental(rentalPost:RentalPost):Observable<ResponseModel>{
+  addRental(rentalPost:RentalPost, payment:Payment):Observable<ResponseModel>{
     let newPath = this.apiUrl + "rentals/add"
-    return this.httpClient.post<ResponseModel>(newPath,rentalPost);
+    const requestData = {
+      rentalPost: rentalPost,
+      payment: payment
+    };
+    return this.httpClient.post<ResponseModel>(newPath,requestData);
   }
   
   isRentable(rentalPost:RentalPost){

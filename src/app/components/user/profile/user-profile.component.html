@@ -1,1 +1,35 @@
-<p>user-profile works!</p>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card shadow" *ngIf="dataLoaded">
+          <div class="card-header bg-primary text-white">
+            Kullanıcı Profili
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h5 class="fw-bold">Ad ve Soyad:</h5>
+              <p>{{ user.firstName }} {{ user.lastName }}</p>
+            </div>
+            <div class="mb-4">
+              <h5 class="fw-bold">Email Adresi:</h5>
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="mb-4">
+              <h5 class="fw-bold">Şirket İsmi:</h5>
+              <p>{{ user.companyName }}</p>
+            </div>
+            <div>
+              <h5 class="fw-bold">Findex Puanı:</h5>
+              <p [ngClass]="{ 'text-success': user.findexScore >= 70, 'text-warning': user.findexScore >= 50 && user.findexScore < 70, 'text-danger': user.findexScore < 50 }">
+                {{ user.findexScore }}
+                <span class="ms-1">
+                  ({{ user.findexScore >= 70 ? 'Çok İyi' : user.findexScore >= 50 ? 'İyi' : 'Düşük' }})
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

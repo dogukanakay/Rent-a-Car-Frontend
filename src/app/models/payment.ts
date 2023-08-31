@@ -5,6 +5,13 @@ export interface Payment{
     amountPaid:number
 }
 
+export class PaymentPost{
+    paymentId:number
+    customerId:number
+    rentId:number
+    amountPaid:number
+}
+
 export interface PaymentCard{
     cardId :number
     customerId:number 

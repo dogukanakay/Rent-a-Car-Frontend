@@ -34,7 +34,6 @@ export class CarComponent implements OnInit {
 
   constructor(
     private carService: CarService,
-    private carImageService:CarImageService,
     private colorService: ColorService,
     private brandService: BrandService,
     private gearService: GearService,

@@ -22,12 +22,8 @@ export class CarDetailsComponent implements OnInit {
   returnDate: Date;
   rentTime: Time;
   returnTime: Time;
-  rentalPost: RentalPost = {
-    carId: 0,
-    customerId: 0,
-    rentDate: new Date(),
-    returnDate: new Date(),
-  };
+  rentalPost: RentalPost = new RentalPost();
+  
 
   //Rental:RentalPost={carId:this.car.carId, customerId:1, rentDate:this.rentDate, returnDate:this.returnDate};
   dataLoaded = false;
@@ -63,11 +59,6 @@ export class CarDetailsComponent implements OnInit {
     });
   }
 
-  addRental(rentalPost: RentalPost) {
-    this.rentalService.addRental(rentalPost).subscribe((response) => {
-      console.warn(response.success, response.message);
-    });
-  }
 
   saveRentalPostInformation() {
     this.rentalPost.carId = this.car.carId;

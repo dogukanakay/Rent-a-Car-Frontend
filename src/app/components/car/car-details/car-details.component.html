@@ -6,7 +6,7 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<table *ngIf="dataLoaded == true" class="table table-success">
+<!--<table *ngIf="dataLoaded == true" class="table table-success">
   <thead>
     <tr>
       <th>Marka Adı</th>
@@ -43,18 +43,120 @@
       height="250px"
     />
   </div>
+-->
 
-  <div style="margin-block: 20px;" >
-    <label for="rentDate">Alacağınız Gün:</label>
-    <input  style="margin-left: 20px" type="datetime-local"  name="rentDate" [(ngModel)]="rentDate"/>
+<div class="col-md-10">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="resim-slayt" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" *ngFor="let image of images; let i = index">
+            <img
+              [src]="imagePathPrefix + image.imagePath"
+              class="d-block w-100"
+              alt="Resim"
+              style="width: 720px; height: 360px;"
+            />
+          </div>
+        </div>
+        
+        <!-- Önceki Butonu -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#resim-slayt"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" style="background-color: orange;" aria-hidden="true"></span>
+          <span class="visually-hidden">Önceki</span>
+        </button>
+        
+        <!-- Sonraki Butonu -->
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#resim-slayt"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"style="background-color: orange;" aria-hidden="true"></span>
+          <span class="visually-hidden">Sonraki</span>
+        </button>
+      </div>
+    </div>
 
- 
-
-    <label style="margin-left: 20px" for="returnDate">Geri Getirelecek Gün:</label>
-    <input style="margin-left: 20px" type="datetime-local" name="returnDate" [(ngModel)]="returnDate"/>
-
-   
-
-    <button (click)="saveRentalPostInformation()" class="btn btn-primary" type="button"style="margin-left: 20px" >Kirala</button>
+    <div class="col-md-6" *ngIf="dataLoaded">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h6>Aracın Alınacağını ve Bırakılacağı Yer</h6>
+          {{ car.locationName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Aracın Sınıfı</h6>
+          {{ car.className }}
+        </li>
+        <li class="list-group-item">
+          <h6>Marka</h6>
+          {{ car.brandName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Model</h6>
+          {{ car.modelName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Vites Tipi</h6>
+          {{ car.gearTypeName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Renk</h6>
+          {{ car.colorName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Yakıt Tipi</h6>
+          {{ car.fuelTypeName }}
+        </li>
+        <li class="list-group-item">
+          <h6>Günlük Ücret</h6>
+          {{ car.dailyPrice | currency : "₺" }}
+        </li>
+        <li class="list-group-item">
+          <h6>Gerekli Findex Puanı</h6>
+          {{ car.findexScore }}
+        </li>
+        <li class="list-group-item">
+          <h6>Araç Hakkında</h6>
+          {{ car.description }}
+        </li>
+      </ul>
+      <br /><br /><br />
+    </div>
   </div>
-</table>
+</div>
+<div style="margin-block: 20px">
+  <label for="rentDate">Alacağınız Gün:</label>
+  <input
+    style="margin-left: 20px"
+    type="datetime-local"
+    name="rentDate"
+    [(ngModel)]="rentDate"
+  />
+
+  <label style="margin-left: 20px" for="returnDate"
+    >Geri Getirelecek Gün:</label
+  >
+  <input
+    style="margin-left: 20px"
+    type="datetime-local"
+    name="returnDate"
+    [(ngModel)]="returnDate"
+  />
+
+  <button
+    (click)="saveRentalPostInformation()"
+    class="btn btn-primary"
+    type="button"
+    style="margin-left: 20px"
+  >
+    Kirala
+  </button>
+</div>
+<!--</table>-->

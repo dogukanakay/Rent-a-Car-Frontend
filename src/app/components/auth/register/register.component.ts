@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
 
 
   userRegisterForm:FormGroup
+  isCompany : boolean;
 
   constructor(private authService:AuthService, private formBuilder:FormBuilder, private toastrService:ToastrService) {}
 
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit {
     this.userRegisterForm = this.formBuilder.group({
       firstName:["",Validators.required],
       lastName:["",Validators.required],
-      email:["", Validators.required],
+      companyName:[""],
+      email:["", Validators.email],
       password:["",Validators.required]
     })
   }

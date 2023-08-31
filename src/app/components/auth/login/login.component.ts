@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   createUserLoginForm() {
     this.userLoginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', Validators.email],
       password: ['', Validators.required],
     });
   }
@@ -40,9 +40,8 @@ export class LoginComponent implements OnInit {
           this.toastrService.success('Giriş Başarılı', 'Başarılı');
           this.authService.loggedin();
           this.localStorageService.setItem('token', response.data.token);
-          this.localStorageService.setItem('user',loginModel.email);
           console.log(response)
-          this.router.navigate(["/"])
+          this.router.navigate(["../"])
         },
         error: (responseError) => {
           console.log(responseError);
