@@ -8,7 +8,7 @@ export interface Payment{
 export class PaymentPost{
     paymentId:number
     customerId:number
-    rentId:number
+    rentId?:number
     amountPaid:number
 }
 

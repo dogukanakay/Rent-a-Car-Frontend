@@ -10,28 +10,7 @@ import { LocationService } from 'src/app/services/location.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit  {
-
-  locations : RentalLocation[];
-  carDetailFilter = new CarDetailFilter();
-
-
-  constructor(private carService:CarService, private locationService:LocationService) {}
-
-  ngOnInit(): void {
-    this.getLocations();
-  }
+export class MainComponent  {
 
   
-  setCarDetailFilter(){
-    this.carService.setCarDetailFilter(this.carDetailFilter);
-  }
-
-  getLocations(){
-    this.locationService.getRentalLocations().subscribe({
-      next: response=>{
-        this.locations = response.data
-      }
-    })
-  }
 }

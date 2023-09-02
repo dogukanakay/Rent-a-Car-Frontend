@@ -60,7 +60,7 @@
           </div>
         </div>
         
-        <!-- Önceki Butonu -->
+        
         <button
           class="carousel-control-prev"
           type="button"
@@ -70,8 +70,7 @@
           <span class="carousel-control-prev-icon" style="background-color: orange;" aria-hidden="true"></span>
           <span class="visually-hidden">Önceki</span>
         </button>
-        
-        <!-- Sonraki Butonu -->
+       
         <button
           class="carousel-control-next"
           type="button"
@@ -132,23 +131,7 @@
   </div>
 </div>
 <div style="margin-block: 20px">
-  <label for="rentDate">Alacağınız Gün:</label>
-  <input
-    style="margin-left: 20px"
-    type="datetime-local"
-    name="rentDate"
-    [(ngModel)]="rentDate"
-  />
-
-  <label style="margin-left: 20px" for="returnDate"
-    >Geri Getirelecek Gün:</label
-  >
-  <input
-    style="margin-left: 20px"
-    type="datetime-local"
-    name="returnDate"
-    [(ngModel)]="returnDate"
-  />
+ 
 
   <button
     (click)="saveRentalPostInformation()"

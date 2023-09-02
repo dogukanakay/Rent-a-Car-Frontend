@@ -11,6 +11,7 @@ import { PaymentPost } from 'src/app/models/payment';
 import { RentalPost } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-payment',
@@ -20,13 +21,12 @@ import { RentalService } from 'src/app/services/rental.service';
 export class PaymentComponent implements OnInit {
   toplamTutar: number;
   carId: number;
-  rentalPost: RentalPost = new RentalPost();
+  rentalPost: RentalPost = this.rentalService.getRentalPostInformation()
   paymentPost: PaymentPost = new PaymentPost();
 
   constructor(
     private rentalService: RentalService,
     private activatedRoute: ActivatedRoute,
-    private carService: CarService,
     private toastrService: ToastrService
   ) {}
 
@@ -35,11 +35,11 @@ export class PaymentComponent implements OnInit {
       this.carId = params['carId'];
     });
 
-    this.rentalPost = this.rentalService.getRentalPostInformation();
-    this.calculateTotalAmount(this.carId);
   }
 
   createRental() {
+    this.paymentPost.amountPaid = this.rentalPost.totalPrice
+    this.paymentPost.customerId = this.rentalPost.customerId;
     this.rentalService.addRental(this.rentalPost, this.paymentPost).subscribe((response) => {
       if (response.success) {
         this.toastrService.success(response.message);
@@ -49,15 +49,5 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  calculateTotalAmount(carId: number) {
-    const start = new Date(this.rentalPost.rentDate);
-    const end = new Date(this.rentalPost.returnDate);
-    const differenceInMilliseconds = end.getTime() - start.getTime();
-    const differenceInDays = Math.floor(
-      differenceInMilliseconds / (1000 * 60 * 60 * 24)
-    );
-    this.carService.getCarDetailsByCarId(carId).subscribe((response) => {
-      this.toplamTutar = response.data.dailyPrice * differenceInDays;
-    });
-  }
+ 
 }

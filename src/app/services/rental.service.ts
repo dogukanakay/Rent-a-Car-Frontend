@@ -8,7 +8,8 @@ import { RentalPost } from '../models/rental';
 import { EntityResponseModel } from '../models/entityResponseModel';
 import { JsonPipe } from '@angular/common';
 import { environment } from 'src/environments/environment.development';
-import { Payment } from '../models/payment';
+import { Payment, PaymentPost } from '../models/payment';
+import { RentalPayment } from '../models/rentalPayment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,27 +18,26 @@ export class RentalService {
   apiUrl=environment.apiUrl
   constructor(private httpClient:HttpClient) { }
   private rentalPostKey = "rental_post_key"
-  
+  rentalPost  =  new RentalPost();
   saveRentalPostInformation(rentalPost:RentalPost):void{
-    localStorage.setItem(this.rentalPostKey, JSON.stringify(rentalPost))
+    this.rentalPost = rentalPost;
   }
 
   getRentalPostInformation():RentalPost{
-    const savedRentalPostInformation = localStorage.getItem(this.rentalPostKey)
-    return savedRentalPostInformation? JSON.parse(savedRentalPostInformation) : null;
+    
+    return this.rentalPost;
   }
 
   getRentals(rentalFilter:RentalFilter):Observable<ListResponseModel<Rental>>{
     let newPath = this.apiUrl + "rentals/getdetails"
     return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
   }
-  addRental(rentalPost:RentalPost, payment:Payment):Observable<ResponseModel>{
+  addRental(rentalPost:RentalPost, paymentPost:PaymentPost):Observable<ResponseModel>{
     let newPath = this.apiUrl + "rentals/add"
-    const requestData = {
-      rentalPost: rentalPost,
-      payment: payment
-    };
-    return this.httpClient.post<ResponseModel>(newPath,requestData);
+    let rentalPayment:RentalPayment = new RentalPayment();
+    rentalPayment.rental = rentalPost;
+    rentalPayment.payment = paymentPost;
+    return this.httpClient.post<ResponseModel>(newPath,rentalPayment);
   }
   
   isRentable(rentalPost:RentalPost){

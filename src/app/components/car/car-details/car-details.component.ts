@@ -2,13 +2,14 @@ import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Car } from 'src/app/models/car';
+import { Car, CarDetailFilter } from 'src/app/models/car';
 import { Image } from 'src/app/models/image';
 import { Rental } from 'src/app/models/rental';
 import { RentalPost } from 'src/app/models/rental';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-car-details',
@@ -23,9 +24,8 @@ export class CarDetailsComponent implements OnInit {
   rentTime: Time;
   returnTime: Time;
   rentalPost: RentalPost = new RentalPost();
-  
+  carDetails:CarDetailFilter = this.carService.getCarDetailFilter()
 
-  //Rental:RentalPost={carId:this.car.carId, customerId:1, rentDate:this.rentDate, returnDate:this.returnDate};
   dataLoaded = false;
   rentStatus: string;
   images: Image[];
@@ -37,14 +37,19 @@ export class CarDetailsComponent implements OnInit {
     private rentalService: RentalService,
     private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService,
+    private userService: UserService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    
     this.activatedRoute.params.subscribe((params) => {
       this.getCarDetailsByCarId(params['carId']);
+      this.calculateTotalAmount(params['carId']);
       this.getImagesByCarId(params['carId']);
     });
+
+    
   }
 
   getCarDetailsByCarId(carId: number) {
@@ -59,16 +64,33 @@ export class CarDetailsComponent implements OnInit {
     });
   }
 
-
+  calculateTotalAmount(carId: number) {
+    const start = new Date(this.carDetails.rentDate);
+    const end = new Date(this.carDetails.returnDate);
+    const differenceInMilliseconds = end.getTime() - start.getTime();
+    const differenceInDays = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24)
+    );
+    this.carService.getCarDetailsByCarId(carId).subscribe((response) => {
+      this.rentalPost.totalPrice = response.data.dailyPrice * differenceInDays;
+    });
+  }
   saveRentalPostInformation() {
     this.rentalPost.carId = this.car.carId;
-    this.rentalPost.customerId = 1;
-    this.rentalPost.rentDate = this.rentDate;
-    this.rentalPost.returnDate = this.returnDate;
-    console.log(this.car.carId, 1, this.rentDate, this.returnDate);
+    this.userService.getUserDetail().subscribe({
+      next: response=>{
+        this.rentalPost.customerId = response.data.id;
+      }
+    })
+    this.rentalPost.dropOffLocationId = this.car.locationId
+    this.rentalPost.pickUpLocationId = this.car.locationId
+    this.rentalPost.rentDate = this.carDetails.rentDate
+    this.rentalPost.returnDate = this.carDetails.returnDate
+
+    console.log(this.rentalPost);
     this.rentalService.isRentable(this.rentalPost).subscribe({
       next: (response) => {
-        console.log(response);
+       
 
         if (response) {
           this.toastrService.success(
@@ -85,15 +107,13 @@ export class CarDetailsComponent implements OnInit {
         }
       },
       error: (responseError) => {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
+       
             this.toastrService.error(
-              responseError.error.Errors[i].ErrorMessage,
+              responseError.error.message,
               'Doğrulama hatasi'
             );
-          }
-        }
-      },
+         
+      }
     });
   }
 }
