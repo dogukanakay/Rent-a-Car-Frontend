@@ -32,6 +32,11 @@ export class RentalService {
     let newPath = this.apiUrl + "rentals/getdetails"
     return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
   }
+
+  getRentalsByUser(userId:number){
+    
+  }
+
   addRental(rentalPost:RentalPost, paymentPost:PaymentPost):Observable<ResponseModel>{
     let newPath = this.apiUrl + "rentals/add"
     let rentalPayment:RentalPayment = new RentalPayment();
