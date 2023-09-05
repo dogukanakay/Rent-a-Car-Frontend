@@ -27,8 +27,10 @@ export class CarDetailsComponent implements OnInit {
   carDetails:CarDetailFilter = this.carService.getCarDetailFilter()
 
   dataLoaded = false;
+  imageLength = true;
   rentStatus: string;
   images: Image[];
+  defaultImage:Image;
   imagePathPrefix: string = 'https://localhost:44338/uploads/images/';
 
   constructor(
@@ -60,7 +62,13 @@ export class CarDetailsComponent implements OnInit {
   }
   getImagesByCarId(carId: number) {
     this.carImageService.getImagesByCarId(carId).subscribe((response) => {
-      this.images = response.data;
+      
+      if(response.data.length<2){
+        this.imageLength = false
+        this.defaultImage = response.data[0]
+      }else{
+        this.images = response.data;
+      }
     });
   }
 
@@ -79,7 +87,7 @@ export class CarDetailsComponent implements OnInit {
     this.rentalPost.carId = this.car.carId;
     this.userService.getUserDetail().subscribe({
       next: response=>{
-        this.rentalPost.customerId = response.data.id;
+        this.rentalPost.customerId = response.data.customerId;
       }
     })
     this.rentalPost.dropOffLocationId = this.car.locationId
@@ -93,12 +101,12 @@ export class CarDetailsComponent implements OnInit {
        
 
         if (response) {
+          this.router.navigate(['/cars', this.car.carId, 'payment']);
+          this.rentalService.saveRentalPostInformation(this.rentalPost);
           this.toastrService.success(
             'Araç Kiralanabilir. Ödeme Sayfasına Yönlendiriliyorsunuz.',
             'Araç Durumu'
           );
-          this.router.navigate(['/cars', this.car.carId, 'payment']);
-          this.rentalService.saveRentalPostInformation(this.rentalPost);
         } else {
           this.toastrService.error(
             'Bu tarihlerde bu araç kiralanamaz',

@@ -48,36 +48,58 @@
 <div class="col-md-10">
   <div class="row">
     <div class="col-md-6">
-      <div id="resim-slayt" class="carousel slide" data-bs-ride="carousel">
+      <div *ngIf="!imageLength">
+        <img
+          [src]="imagePathPrefix + defaultImage.imagePath"
+          class="d-block w-100"
+          alt="Resim"
+          width="720"
+          height="360"
+        />
+      </div>
+      <div
+        *ngIf="imageLength"
+        id="resim-slayt"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
         <div class="carousel-inner">
-          <div class="carousel-item active" *ngFor="let image of images; let i = index">
+          <div class="carousel-item active" *ngFor="let image of images">
             <img
-              [src]="imagePathPrefix + image.imagePath"
+              [ngSrc]="imagePathPrefix + image.imagePath"
               class="d-block w-100"
               alt="Resim"
-              style="width: 720px; height: 360px;"
+              width="720"
+              height="360"
             />
           </div>
         </div>
-        
-        
+
         <button
           class="carousel-control-prev"
           type="button"
           data-bs-target="#resim-slayt"
           data-bs-slide="prev"
         >
-          <span class="carousel-control-prev-icon" style="background-color: orange;" aria-hidden="true"></span>
+          <span
+            class="carousel-control-prev-icon"
+            style="background-color: orange"
+            aria-hidden="true"
+          ></span>
           <span class="visually-hidden">Önceki</span>
         </button>
-       
+
         <button
           class="carousel-control-next"
           type="button"
           data-bs-target="#resim-slayt"
           data-bs-slide="next"
         >
-          <span class="carousel-control-next-icon"style="background-color: orange;" aria-hidden="true"></span>
+          <span
+            class="carousel-control-next-icon"
+            style="background-color: orange"
+            aria-hidden="true"
+          ></span>
           <span class="visually-hidden">Sonraki</span>
         </button>
       </div>
@@ -131,8 +153,6 @@
   </div>
 </div>
 <div style="margin-block: 20px">
- 
-
   <button
     (click)="saveRentalPostInformation()"
     class="btn btn-primary"

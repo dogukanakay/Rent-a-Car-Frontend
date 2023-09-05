@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
-import { Rental, RentalFilter } from '../models/rental';
+import { Rental, RentalDetailFilter } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
 import { RentalPost } from '../models/rental';
 import { EntityResponseModel } from '../models/entityResponseModel';
@@ -17,8 +17,16 @@ import { RentalPayment } from '../models/rentalPayment';
 export class RentalService {
   apiUrl=environment.apiUrl
   constructor(private httpClient:HttpClient) { }
-  private rentalPostKey = "rental_post_key"
   rentalPost  =  new RentalPost();
+  private rentalDetailFilter = new RentalDetailFilter();
+
+
+  getRentalDetailFilter(){
+    return this.rentalDetailFilter;
+  }
+
+
+
   saveRentalPostInformation(rentalPost:RentalPost):void{
     this.rentalPost = rentalPost;
   }
@@ -28,14 +36,11 @@ export class RentalService {
     return this.rentalPost;
   }
 
-  getRentals(rentalFilter:RentalFilter):Observable<ListResponseModel<Rental>>{
+  getRentals(rentalDetailFilter:RentalDetailFilter):Observable<ListResponseModel<Rental>>{
     let newPath = this.apiUrl + "rentals/getdetails"
-    return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalFilter)
+    return this.httpClient.post<ListResponseModel<Rental>>(newPath,rentalDetailFilter)
   }
 
-  getRentalsByUser(userId:number){
-    
-  }
 
   addRental(rentalPost:RentalPost, paymentPost:PaymentPost):Observable<ResponseModel>{
     let newPath = this.apiUrl + "rentals/add"

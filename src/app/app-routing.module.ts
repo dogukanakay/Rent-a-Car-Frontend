@@ -16,6 +16,7 @@ import { loginGuard } from './guards/login.guard';
 import { UserProfileComponent } from './components/user/profile/user-profile.component';
 import { CarImageUpdateComponent } from './components/car/car-images/car-image-update/car-image-update.component';
 import { CarImageAddComponent } from './components/car/car-images/car-image-add/car-image-add.component';
+import { UserRentsComponent } from './components/user/user-rents/user-rents.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:MainComponent},
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path:"cars/color/:colorId", component:CarComponent},
   {path:"cars/color/:colorId/brand/:brandId", component:CarComponent},
   {path:"cars/:carId", component:CarDetailsComponent},
-  {path:"cars/:carId/payment", component:PaymentComponent},
+  {path:"cars/:carId/payment", component:PaymentComponent, canActivate:[loginGuard]},
   {path:"brand/add", component:BrandAddComponent, canActivate:[loginGuard]},
   {path:"color/add", component:ColorAddComponent, canActivate:[loginGuard]},
   {path:"car/add", component:CarAddComponent, canActivate:[loginGuard]},
@@ -35,7 +36,8 @@ const routes: Routes = [
   {path:"brand/update/:brandId/:brandName", component:BrandUpdateComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
-  {path:"profile", component:UserProfileComponent, canActivate:[loginGuard]}
+  {path:"profile", component:UserProfileComponent, canActivate:[loginGuard]},
+  {path:"myrents", component:UserRentsComponent, canActivate:[loginGuard]}
 ];
 
 @NgModule({

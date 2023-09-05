@@ -1,4 +1,3 @@
-
 <div
   *ngIf="dataLoaded == false"
   class="spinner-border text-primary"
@@ -71,7 +70,7 @@
 -->
 <div class="container" *ngIf="dataLoaded == true">
   <div class="row">
-    <div class="col-md-2 position-fixed" style="background-color: aqua;" >
+    <div class="col-md-2 position-fixed" style="background-color: aqua">
       <div>
         <label for="colors">Renkler:</label>
         <select id="colors" name="colors" [(ngModel)]="carDetailFilter.colorId">
@@ -126,19 +125,22 @@
       </div>
     </div>
 
-    <div class="col-md-10 offset-md-2 scrollable-content" >
-      <div class="row" *ngFor="let car of cars | filterCar : filterText">
+    <div class="col-md-10 offset-md-2 scrollable-content">
+      <div class="row" style="margin-bottom: 100px;" *ngFor="let car of cars | filterCar : filterText">
         <div class="col-md-6">
           <img
-            [src]="imagePathPrefix + car.imagePath"
+            [ngSrc]="imagePathPrefix + car.imagePath"
             alt="Çekilen Resim"
             class="img-fluid"
+            width="720"
+            height="360"
+            
           />
         </div>
 
         <div class="col-md-6">
-          <ul class="list-group" >
-            <li class="list-group-item" >
+          <ul class="list-group">
+            <li class="list-group-item">
               <h6>Marka</h6>
               {{ car.brandName }}
             </li>
@@ -174,7 +176,7 @@
               Detaylar
             </button>
           </ul>
-          <br /><br /><br />
+         
         </div>
       </div>
     </div>

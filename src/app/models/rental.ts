@@ -1,8 +1,14 @@
-export interface Rental extends RentalFilter{
+export interface Rental extends RentalDetailFilter{
+    rentId:number
     brandName:string
+    modelName:string
+    gearTypeName:string
+    fuelTypeName:string
     customerName:string
     rentDate:Date
     returnDate:Date
+    returnDateActual?:Date
+    totalPrice:number
 }
 
 export class RentalPost{
@@ -15,7 +21,7 @@ export class RentalPost{
     totalPrice:number
 }
 
-export class RentalFilter{
+export class RentalDetailFilter{
     carId?:number
     customerId?:number
 }

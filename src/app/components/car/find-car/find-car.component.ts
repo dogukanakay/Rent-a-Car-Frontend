@@ -13,7 +13,7 @@ import { LocationService } from 'src/app/services/location.service';
 })
 export class FindCarComponent implements OnInit {
   locations : RentalLocation[];
-  carDetailFilter = new CarDetailFilter();
+  carDetailFilter = this.carService.getCarDetailFilter();
 
 
   constructor(private carService:CarService, private locationService:LocationService, private router:Router, private toastrService:ToastrService) {}
@@ -29,7 +29,6 @@ export class FindCarComponent implements OnInit {
     }else if(this.carDetailFilter.rentDate>=this.carDetailFilter.returnDate){
       this.toastrService.error("Hatalı Tarih Seçimi Yaptınız")
     }else{
-      this.carService.setCarDetailFilter(this.carDetailFilter);
       this.router.navigate(["cars"])
     }
     

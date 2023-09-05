@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import { NgOptimizedImage } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,6 +65,7 @@ import { UserRentsComponent } from './components/user/user-rents/user-rents.comp
     CarImageUpdateComponent,
     CarImageAddComponent,
     FindCarComponent,
+    
     UserRentsComponent,
     
   
@@ -74,13 +76,15 @@ import { UserRentsComponent } from './components/user/user-rents/user-rents.comp
     HttpClientModule, 
     FormsModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi : true}
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi : true},
+    
   ],
   bootstrap: [AppComponent],
 })

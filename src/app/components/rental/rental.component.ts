@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Rental, RentalFilter } from 'src/app/models/rental';
+import { Rental, RentalDetailFilter } from 'src/app/models/rental';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalComponent implements OnInit {
   rentals: Rental[] = [];
-  rentalFilter:RentalFilter = new RentalFilter();
+  rentalFilter:RentalDetailFilter = new RentalDetailFilter();
  
   dataLoaded = false;
   constructor(private rentalService: RentalService) {}
