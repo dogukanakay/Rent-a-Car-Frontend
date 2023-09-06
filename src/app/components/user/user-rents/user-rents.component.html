@@ -3,19 +3,22 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col" class="text-primary">#</th>
                 <th scope="col">Kira No</th>
                 <th scope="col">Marka</th>
                 <th scope="col">Model</th>
                 <th scope="col">Vites Türü</th>
                 <th scope="col">Yakıt Türü</th>
-                <th scope="col">Kiralama Tarihi</th>
+                <th scope="col">Alınacağı Tarihi</th>
                 <th scope="col">Dönüş Tarihi</th>
                 <th scope="col">Teslim Edilen Tarih</th>
                 <th scope="col">Toplam Fiyat</th>
+                <th scope="col">İşlem Tarihi</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let rental of rentals ">
+            <tr *ngFor="let rental of rentals; let i = index ">
+                <td class="text-primary">{{i+1}}</td>
                 <td>{{rental.rentId}}</td>
                 <td>{{rental.brandName}}</td>
                 <td>{{rental.modelName}}</td>
@@ -25,6 +28,7 @@
                 <td>{{rental.returnDate}}</td>
                 <td>{{rental.returnDateActual}}</td>
                 <td>{{rental.totalPrice}}</td>
+                <td>{{rental.transactionDate}}</td>
             </tr>
             
         </tbody>

@@ -23,7 +23,7 @@
               <p [ngClass]="{ 'text-success': user.findexScore >= 70, 'text-warning': user.findexScore >= 50 && user.findexScore < 70, 'text-danger': user.findexScore < 50 }">
                 {{ user.findexScore }}
                 <span class="ms-1">
-                  ({{ user.findexScore >= 70 ? 'Çok İyi' : user.findexScore >= 50 ? 'İyi' : 'Düşük' }})
+                  ({{ user.findexScore >= 1500 ? 'Çok İyi' : user.findexScore >= 1000 ? 'İyi' : 'Düşük' }})
                 </span>
               </p>
             </div>

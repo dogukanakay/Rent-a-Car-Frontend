@@ -9,6 +9,7 @@ export interface Rental extends RentalDetailFilter{
     returnDate:Date
     returnDateActual?:Date
     totalPrice:number
+    transactionDate:Date
 }
 
 export class RentalPost{
