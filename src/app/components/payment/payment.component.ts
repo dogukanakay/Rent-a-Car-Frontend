@@ -40,11 +40,11 @@ export class PaymentComponent implements OnInit {
   createRental() {
     this.paymentPost.amountPaid = this.rentalPost.totalPrice
     this.paymentPost.customerId = this.rentalPost.customerId;
-    this.rentalService.addRental(this.rentalPost, this.paymentPost).subscribe((response) => {
-      if (response.success) {
+    this.rentalService.addRental(this.rentalPost, this.paymentPost).subscribe({
+      next: response=>{
         this.toastrService.success(response.message);
-      } else {
-        this.toastrService.error(response.message);
+      },error: responseError=>{
+        this.toastrService.error(responseError.error.message)
       }
     });
   }

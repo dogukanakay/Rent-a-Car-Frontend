@@ -5,6 +5,8 @@
 >
   <span class="visually-hidden">Loading...</span>
 </div>
+<!--
+
 
 <div class="mb-3">
   <label for="filterText" class="form-label">Araba ara</label>
@@ -18,7 +20,7 @@
 </div>
 <div *ngIf="filterText.length > 2" class="alert alert-success">
   {{ filterText }} aradınız
-</div>
+</div>-->
 <!--
 <table  class="table table-success">
   <thead>
@@ -70,63 +72,96 @@
 -->
 <div class="container" *ngIf="dataLoaded == true">
   <div class="row">
-    <div class="col-md-2 position-fixed" style="background-color: aqua">
-      <div>
-        <label for="colors">Renkler:</label>
-        <select id="colors" name="colors" [(ngModel)]="carDetailFilter.colorId">
-          <option [ngValue]="undefined">Hepsi</option>
-          <option *ngFor="let color of colors" [value]="color.colorId">
-            {{ color.colorName }}
-          </option>
-        </select>
-      </div>
-
-      <br />
-      <div>
-        <label for="brands">Markalar: </label>
-        <select id="brands" name="brands" [(ngModel)]="carDetailFilter.brandId">
-          <option [ngValue]="undefined">Hepsi</option>
-          <option *ngFor="let brand of brands" [value]="brand.brandId">
-            {{ brand.brandName }}
-          </option>
-        </select>
-      </div>
-      <br />
-      <div>
-        <label for="gears">Vites: </label>
-        <select id="gears" name="gears" [(ngModel)]="carDetailFilter.gearId">
-          <option [ngValue]="undefined">Hepsi</option>
-          <option *ngFor="let gear of gears" [value]="gear.gearId">
-            {{ gear.gearName }}
-          </option>
-        </select>
-      </div>
-      <br />
-      <div>
-        <label for="fuels">Yakıt: </label>
-        <select id="fuels" name="fuels" [(ngModel)]="carDetailFilter.fuelId">
-          <option [ngValue]="undefined">Hepsi</option>
-          <option *ngFor="let fuel of fuels" [value]="fuel.fuelId">
-            {{ fuel.fuelName }}
-          </option>
-        </select>
-      </div>
-      <br />
-      <div>
-        <br /><br />
-        <button class="btn btn-primary" type="button" (click)="getCars()">
-          Filtrele
-        </button>
-        <br />
-        <br />
-        <button class="btn btn-primary" routerLink="../car/add">
-          Araba Ekle
-        </button>
-      </div>
-    </div>
+    <aside
+      class="col-md-2 position-fixed"
+      style="background-color: rgb(154, 199, 199)"
+    >
+      <table [cellPadding]="30">
+        <tr>
+          <td>
+            <label for="colors">Renkler:</label>
+          </td>
+          <td>
+            <select
+              id="colors"
+              name="colors"
+              [(ngModel)]="carDetailFilter.colorId"
+            >
+              <option [ngValue]="undefined">Hepsi</option>
+              <option *ngFor="let color of colors" [value]="color.colorId">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="brands">Markalar: </label>
+          </td>
+          <td>
+            <select
+              id="brands"
+              name="brands"
+              [(ngModel)]="carDetailFilter.brandId"
+            >
+              <option [ngValue]="undefined">Hepsi</option>
+              <option *ngFor="let brand of brands" [value]="brand.brandId">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="gears">Vites: </label>
+          </td>
+          <td>
+            <select
+              id="gears"
+              name="gears"
+              [(ngModel)]="carDetailFilter.gearId"
+            >
+              <option [ngValue]="undefined">Hepsi</option>
+              <option *ngFor="let gear of gears" [value]="gear.gearId">
+                {{ gear.gearName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="fuels">Yakıt: </label>
+          </td>
+          <td>
+            <select
+              id="fuels"
+              name="fuels"
+              [(ngModel)]="carDetailFilter.fuelId"
+            >
+              <option [ngValue]="undefined">Hepsi</option>
+              <option *ngFor="let fuel of fuels" [value]="fuel.fuelId">
+                {{ fuel.fuelName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <button class="btn btn-primary" type="button" (click)="getCars()">
+              Filtrele
+            </button>
+          </td>
+        </tr>
+      </table>
+    </aside>
 
     <div class="col-md-10 offset-md-2 scrollable-content">
-      <div class="row" style="margin-bottom: 100px;" *ngFor="let car of cars | filterCar : filterText">
+      <div
+        class="row"
+        style="margin-bottom: 100px"
+        *ngFor="let car of cars | filterCar : filterText"
+      >
         <div class="col-md-6">
           <img
             [ngSrc]="imagePathPrefix + car.imagePath"
@@ -134,7 +169,6 @@
             class="img-fluid"
             width="720"
             height="360"
-            
           />
         </div>
 
@@ -176,7 +210,6 @@
               Detaylar
             </button>
           </ul>
-         
         </div>
       </div>
     </div>
