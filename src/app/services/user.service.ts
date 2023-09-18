@@ -18,6 +18,7 @@ export class UserService {
     let newPath = this.apiUrl + "users/getbyemail";
 
     return this.httpClient.get<EntityResponseModel<User>>(newPath);
-
   }
+
+  updateUser(){}
 }

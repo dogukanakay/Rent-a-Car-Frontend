@@ -14,7 +14,7 @@
               <h5 class="fw-bold">Email Adresi:</h5>
               <p>{{ user.email }}</p>
             </div>
-            <div class="mb-4">
+            <div *ngIf="user.companyName" class="mb-4">
               <h5 class="fw-bold">Şirket İsmi:</h5>
               <p>{{ user.companyName }}</p>
             </div>
@@ -27,6 +27,13 @@
                 </span>
               </p>
             </div>
+          </div>
+          <div class="card-footer">
+            <div class=" d-flex justify-content-sm-between">
+              <button class="btn btn-primary" routerLink="update">Düzenle</button>
+              <button class="btn btn-primary " routerLink="password">Yeni Şifre Belirle</button>
+            </div>
+            
           </div>
         </div>
       </div>

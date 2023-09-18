@@ -35,6 +35,7 @@ import { CarImageUpdateComponent } from './components/car/car-images/car-image-u
 import { CarImageAddComponent } from './components/car/car-images/car-image-add/car-image-add.component';
 import { FindCarComponent } from './components/car/find-car/find-car.component';
 import { UserRentsComponent } from './components/user/user-rents/user-rents.component';
+import { ProfileUpdateComponent } from './components/user/profile/profile-update/profile-update.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { UserRentsComponent } from './components/user/user-rents/user-rents.comp
     FindCarComponent,
     
     UserRentsComponent,
+          ProfileUpdateComponent,
     
   
   ],
