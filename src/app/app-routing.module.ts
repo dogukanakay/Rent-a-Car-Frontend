@@ -19,6 +19,7 @@ import { CarImageAddComponent } from './components/car/car-images/car-image-add/
 import { UserRentsComponent } from './components/user/user-rents/user-rents.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { ProfileUpdateComponent } from './components/user/profile/profile-update/profile-update.component';
+import { NewPasswordComponent } from './components/user/profile/new-password/new-password.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:MainComponent},
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path:"register", component:RegisterComponent},
   {path:"profile", component:UserProfileComponent, canActivate:[loginGuard]},
   {path:"profile/update", component:ProfileUpdateComponent, canActivate:[loginGuard]},
+  {path:"profile/password", component:NewPasswordComponent, canActivate:[loginGuard]},
   {path:"myrents", component:UserRentsComponent, canActivate:[loginGuard]},
   {path:"brands", component:BrandComponent, canActivate:[loginGuard]}
 ];

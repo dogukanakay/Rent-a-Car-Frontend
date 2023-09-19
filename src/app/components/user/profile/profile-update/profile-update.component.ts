@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/models/user';
+import { UserDetails } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileUpdateComponent implements OnInit {
   profileUpdateForm: FormGroup;
-  user: User;
+  user: UserDetails;
   dataloaded = false;
   constructor(
     private userService: UserService,
@@ -22,7 +22,7 @@ export class ProfileUpdateComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getUser();
-    this.createCompanyProfileUpdateForm();
+    this.createProfileUpdateForm();
   }
 
   getUser() {
@@ -45,24 +45,31 @@ export class ProfileUpdateComponent implements OnInit {
     });
   }
 
-  createCompanyProfileUpdateForm() {
-    this.profileUpdateForm = this.formBuilder.group({
-      id: ['',Validators.required],
-      customerId: ['',Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      companyName: ['', Validators.required],
-    });
-  }
   createProfileUpdateForm() {
     this.profileUpdateForm = this.formBuilder.group({
       id: ['',Validators.required],
       customerId: ['',Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      companyName: [''],
     });
   }
+  
   userUpdate() {
-    
+    if(this.profileUpdateForm.valid){
+      let UserDetailsModel = Object.assign({},this.profileUpdateForm.value);
+
+      this.userService.updateUserDetails(UserDetailsModel).subscribe({
+        next: response=>{
+          this.toastrService.success(response.message, "Başarılı")
+          this.router.navigate(["profile"])
+        },
+        error: responseError=>{
+          this.toastrService.error(responseError.error.Message)
+        }
+      })
+    }else{
+      this.toastrService.error("Boş alan bırakmayın lütfen", "HATA")
+    }
   }
 }

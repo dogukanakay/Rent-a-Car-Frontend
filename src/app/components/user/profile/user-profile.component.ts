@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/models/user';
+import { UserDetails } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService:UserService, private toastrService:ToastrService) {}
-  user:User;
+  user:UserDetails;
   dataLoaded:boolean=false;
   ngOnInit(): void {
     this.userService.getUserDetail().subscribe({
