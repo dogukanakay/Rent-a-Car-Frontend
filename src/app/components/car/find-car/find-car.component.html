@@ -1,46 +1,44 @@
+<div class="container">
+  <div style="margin-block: 20px; text-align: center; margin: 20%">
+    <label for="rentDate" style="color: bisque">Alacağınız Gün:</label>
+    <input
+      style="margin-left: 20px"
+      type="datetime-local"
+      name="rentDate"
+      [(ngModel)]="carDetailFilter.rentDate"
+      id="rentDate"
+    />
 
-  <div class="container">
-    <div style="margin-block: 20px; text-align: center; margin: 20%">
-      <label for="rentDate" style="color: bisque;">Alacağınız Gün:</label>
-      <input
-        style="margin-left: 20px"
-        type="datetime-local"
-        name="rentDate"
-        [(ngModel)]="carDetailFilter.rentDate"
-      />
+    <label style="margin-left: 20px; color: bisque" for="returnDate"
+      >Geri Getirelecek Gün:</label
+    >
+    <input 
+      style="margin-left: 20px"
+      type="datetime-local"
+      name="returnDate"
+      [(ngModel)]="carDetailFilter.returnDate"
+      id="returnDate"
+      [min]="carDetailFilter.rentDate"
+    />
 
-      <label style="margin-left: 20px; color: bisque;" for="returnDate"
-        >Geri Getirelecek Gün:</label
-      >
-      <input
-        style="margin-left: 20px"
-        type="datetime-local"
-        name="returnDate"
-        [(ngModel)]="carDetailFilter.returnDate"
-      />
+    <select
+      id="locations"
+      name="locations"
+      [(ngModel)]="carDetailFilter.locationId"
+    >
+      <option [ngValue]="undefined">Hepsi</option>
+      <option *ngFor="let location of locations" [value]="location.locationId">
+        {{ location.locationName }}
+      </option>
+    </select>
 
-      <select
-        id="locations"
-        name="locations"
-        [(ngModel)]="carDetailFilter.locationId"
-      >
-        <option [ngValue]="undefined">Hepsi</option>
-        <option
-          *ngFor="let location of locations"
-          [value]="location.locationId"
-        >
-          {{ location.locationName }}
-        </option>
-      </select>
-
-      <button
-        class="btn btn-primary"
-        type="button"
-        style="margin-left: 20px"
-        (click)="setCarDetailFilter()"
-      >
-        Araba Ara
-      </button>
-    </div>
+    <button
+      class="btn btn-primary"
+      type="button"
+      style="margin-left: 20px"
+      (click)="setCarDetailFilter()"
+    >
+      Araba Ara
+    </button>
   </div>
-
+</div>

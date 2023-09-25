@@ -7,6 +7,7 @@ import { ResponseModel } from '../models/responseModel';
 import { EntityResponseModel } from '../models/entityResponseModel';
 import { Image } from '../models/image';
 import { environment } from 'src/environments/environment.development';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,26 @@ export class CarService {
   apiUrl = environment.apiUrl
   private carDetailFilter = new CarDetailFilter();
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private sessionStorageService:SessionStorageService) { }
   
   
-  setCarDetailFilter(carDetailFilter:CarDetailFilter){
-    this.carDetailFilter = carDetailFilter
+  
+  setCarDetailFilter(carDetailFilter: CarDetailFilter) {
+    this.carDetailFilter = carDetailFilter;
+    this.sessionStorageService.setItem(
+      'carFilters',
+      JSON.stringify(this.carDetailFilter)
+    );
   }
-  getCarDetailFilter(){
+
+  getCarDetailFilter() {
+    const savedFilterJson = this.sessionStorageService.getItem('carFilters');
+    if (savedFilterJson) {
+      this.carDetailFilter = JSON.parse(savedFilterJson);
+    }
     return this.carDetailFilter;
   }
+
   getCars(carDetailFilter:CarDetailFilter):Observable<ListResponseModel<Car>>{
     let newPath = this.apiUrl +"cars/getcardetails"
     return this.httpClient.post<ListResponseModel<Car>>(newPath,carDetailFilter);

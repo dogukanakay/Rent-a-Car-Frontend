@@ -20,6 +20,7 @@ import { UserRentsComponent } from './components/user/user-rents/user-rents.comp
 import { BrandComponent } from './components/brand/brand.component';
 import { ProfileUpdateComponent } from './components/user/profile/profile-update/profile-update.component';
 import { NewPasswordComponent } from './components/user/profile/new-password/new-password.component';
+import { pageTransitionGuard } from './guards/page-transition.guard';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:MainComponent},

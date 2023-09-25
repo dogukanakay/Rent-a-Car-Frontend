@@ -21,6 +21,7 @@ export class ProfileUpdateComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    
     this.getUser();
     this.createProfileUpdateForm();
   }

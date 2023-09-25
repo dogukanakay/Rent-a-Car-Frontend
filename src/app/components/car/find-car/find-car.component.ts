@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetailFilter } from 'src/app/models/car';
@@ -9,37 +12,45 @@ import { LocationService } from 'src/app/services/location.service';
 @Component({
   selector: 'app-find-car',
   templateUrl: './find-car.component.html',
-  styleUrls: ['./find-car.component.css']
+  styleUrls: ['./find-car.component.css'],
 })
 export class FindCarComponent implements OnInit {
-  locations : RentalLocation[];
+  locations: RentalLocation[];
   carDetailFilter = this.carService.getCarDetailFilter();
 
-
-  constructor(private carService:CarService, private locationService:LocationService, private router:Router, private toastrService:ToastrService) {}
+  constructor(
+    private carService: CarService,
+    private locationService: LocationService,
+    private router: Router,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getLocations();
   }
 
-  
-  setCarDetailFilter(){
-    if(this.carDetailFilter.rentDate==null || this.carDetailFilter.returnDate == null ){
-      this.toastrService.error("Lütfen Tarih Seçimi Yapınız.")
-    }else if(this.carDetailFilter.rentDate>=this.carDetailFilter.returnDate){
-      this.toastrService.error("Hatalı Tarih Seçimi Yaptınız")
-    }else{
-      this.router.navigate(["cars"])
+
+  setCarDetailFilter() {
+    if (
+      this.carDetailFilter.rentDate == null ||
+      this.carDetailFilter.returnDate == null
+    ) {
+      this.toastrService.error('Lütfen Tarih Seçimi Yapınız.');
+    } else if (
+      this.carDetailFilter.rentDate >= this.carDetailFilter.returnDate
+    ) {
+      this.toastrService.error('Hatalı Tarih Seçimi Yaptınız');
+    } else {
+      this.carService.setCarDetailFilter(this.carDetailFilter)
+      this.router.navigate(['cars']);
     }
-    
   }
 
-  getLocations(){
+  getLocations() {
     this.locationService.getRentalLocations().subscribe({
-      next: response=>{
-        this.locations = response.data
-       
-      }
-    })
+      next: (response) => {
+        this.locations = response.data;
+      },
+    });
   }
 }

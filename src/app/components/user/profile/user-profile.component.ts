@@ -17,7 +17,6 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserDetail().subscribe({
       next: response=>{
         this.user = response.data
-        console.log(this.user)
         this.dataLoaded = true;
       },
       error: responseError=>{

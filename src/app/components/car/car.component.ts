@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car, CarDetailFilter } from 'src/app/models/car';
 import { Color } from 'src/app/models/color';
 import { Fuel } from 'src/app/models/fuel';
 import { Gear } from 'src/app/models/gear';
-import { Image } from 'src/app/models/image';
 import { BrandService } from 'src/app/services/brand.service';
-import { CarImageService } from 'src/app/services/car-image.service';
-import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { FuelService } from 'src/app/services/fuel.service';
 import { GearService } from 'src/app/services/gear.service';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car',
@@ -41,19 +39,18 @@ export class CarComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     this.getBrands();
     this.getColors();
     this.getFuels();
     this.getGears();
-
     this.getCars();
   }
 
   setCurrentCar(car: Car) {
     this.currentCar = car;
   }
-
   getCars() {
     this.carService.getCars(this.carDetailFilter).subscribe({
       next: (response) => {
@@ -62,7 +59,7 @@ export class CarComponent implements OnInit {
       },
       error: (responseError) => {
         this.toastrService.error(responseError.error.Message, 'HATA');
-        this.router.navigate(["/"]);
+        this.router.navigate(['/']);
       },
     });
   }
@@ -77,25 +74,25 @@ export class CarComponent implements OnInit {
 
   getBrands() {
     this.brandService.getBrands().subscribe({
-      next: response=>{
+      next: (response) => {
         this.brands = response.data;
-      }
+      },
     });
   }
 
   getGears() {
     this.gearService.getGearTypes().subscribe({
-      next: response=> {
+      next: (response) => {
         this.gears = response.data;
       },
     });
   }
 
-  getFuels(){
+  getFuels() {
     this.fuelService.getFuelTypes().subscribe({
-      next: response=>{
+      next: (response) => {
         this.fuels = response.data;
-      }
-    })
+      },
+    });
   }
 }

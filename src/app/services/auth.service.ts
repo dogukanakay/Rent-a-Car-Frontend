@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.development';
 import { LocalStorageService } from './local-storage.service';
 import { ResponseModel } from '../models/responseModel';
 import { EntityResponseModel } from '../models/entityResponseModel';
+import { NewPassword } from '../models/newPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,11 @@ export class AuthService {
     let newPath = this.apiUrl+'auth/isauthenticated'
     return this.httpClient.get<ResponseModel>(newPath)
 
+  }
+
+  updatePassword(newPassword:NewPassword){
+    let newPath = this.apiUrl+'auth/updatepassword'
+    return this.httpClient.post<ResponseModel>(newPath, newPassword)
   }
 
 }

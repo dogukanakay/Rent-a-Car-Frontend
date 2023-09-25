@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
           this.toastrService.success('Giriş Başarılı', 'Başarılı');
           this.authService.loggedin();
           this.localStorageService.setItem('token', response.data.token);
-          console.log(response)
           this.router.navigate(["../"])
         },
         error: (responseError) => {
